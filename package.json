@@ -1,0 +1,8 @@
+{
+  "name": "wow-activity",
+  "version": "1.0.0",
+  "description": "Tracks character activity and progression",
+  "main": "index.js",
+  "author": "Aigars Bedeicis <a.bedeicis@gmail.com>",
+  "license": "MIT"
+}
