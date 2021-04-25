@@ -23,12 +23,6 @@ export class Profile {
   username: string;
 
   /**
-   * Name column
-   */
-  @Column()
-  name: string;
-
-  /**
    * Email column
    */
   @Column()

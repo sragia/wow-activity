@@ -56,6 +56,8 @@ export class ConfigService {
       DB_HOST: joi.string().default('localhost'),
       DB_PORT: joi.number().default('8889'),
       DB_DATABASE: joi.string().default('nest'),
+      BNET_CLIENT_ID: joi.string().required(),
+      BNET_CLIENT_SECRET: joi.string().required()
     });
 
     /**

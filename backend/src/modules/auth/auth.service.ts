@@ -56,7 +56,6 @@ export class AuthService {
   async createToken({
     id,
     username,
-    name,
     email,
   }: Profile): Promise<ITokenReturnBody> {
     return {
@@ -65,7 +64,6 @@ export class AuthService {
       token: this.jwtService.sign({
         id,
         username,
-        name,
         email,
       }),
     };
