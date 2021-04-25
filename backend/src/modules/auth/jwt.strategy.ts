@@ -4,6 +4,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 
 import { ConfigService } from '../config/config.service';
 import { ProfileService } from '../profile/profile.service';
+import { Request } from 'express';
 
 /**
  * Jwt Strategy Class
@@ -20,7 +21,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     private readonly profileService: ProfileService,
   ) {
     super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      jwtFromRequest: ExtractJwt.fromExtractors([
+        (request: Request) => {
+          console.log(request.cookies.token);
+          return request?.cookies?.token;
+        },
+      ]),
       ignoreExpiration: false,
       secretOrKey: configService.get('WEBTOKEN_SECRET_KEY'),
     });
@@ -43,6 +49,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
 
     delete profile.password;
-    return { ...profile, roles: profile.roles.map(role => role.role) };
+    return { ...profile, roles: profile.roles.map((role) => role.role) };
   }
 }

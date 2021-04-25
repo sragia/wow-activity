@@ -1,9 +1,10 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Res } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthService, ITokenReturnBody } from './auth.service';
 import { LoginPayload } from './payload/login.payload';
 import { RegisterPayload } from './payload/register.payload';
 import { ProfileService } from '../profile/profile.service';
+import { Response } from 'express';
 
 /**
  * Authentication Controller
@@ -29,9 +30,14 @@ export class AuthController {
   @ApiResponse({ status: 201, description: 'Login Completed' })
   @ApiResponse({ status: 400, description: 'Bad Request' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async login(@Body() payload: LoginPayload): Promise<ITokenReturnBody> {
+  async login(
+    @Body() payload: LoginPayload,
+    @Res({ passthrough: true }) response: Response,
+  ): Promise<ITokenReturnBody> {
     const profile = await this.authService.validateUser(payload);
-    return await this.authService.createToken(profile);
+    const token = await this.authService.createToken(profile);
+    response.cookie('token', token.token, { httpOnly: true });
+    return token;
   }
 
   /**

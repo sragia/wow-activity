@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { actionTypes, selectors } from '../../features/counter'
+import { UserActions } from '../../features/user/actionTypes'
 
 const Counter: React.FC = () => {
   const count = useSelector(selectors.getCountValue)
@@ -39,6 +40,20 @@ const Counter: React.FC = () => {
                   data-qa="increment-counter"
                   onClick={() =>
                     dispatch({ type: actionTypes.INCREMENT_COUNTER })
+                  }
+                >
+                  increment
+                </button>
+
+                <button
+                  className="waves-effect waves-teal btn-flat red"
+                  type="button"
+                  data-qa="increment-counter"
+                  onClick={() =>
+                    dispatch({
+                      type: UserActions.Login,
+                      payload: { username: 'Exality', password: 'banaans94' },
+                    })
                   }
                 >
                   increment

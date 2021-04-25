@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Roles } from '../app/roles.entity';
 import { ProfileController } from './profile.controller';
 import { PassportModule } from '@nestjs/passport';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Profile, Roles])],

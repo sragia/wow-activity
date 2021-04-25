@@ -14,6 +14,7 @@ import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ProfileService, IGenericMessageBody } from './profile.service';
 import { PatchProfilePayload } from './payload/patch.profile.payload';
 import { Profile } from './profile.entity';
+import { JwtService } from '@nestjs/jwt';
 
 /**
  * Profile Controller
@@ -44,6 +45,7 @@ export class ProfileController {
         'The profile with that username could not be found.',
       );
     }
+    delete profile.password;
     return profile;
   }
 
