@@ -1,18 +1,19 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
-import { Navbar } from './components/Navbar'
-import { About } from './pages/About'
+import { DashboardPage } from './pages/Dashboard'
 import { Home } from './pages/Home'
+import { Logo } from './components/logo/Logo'
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <Navbar />
+      <Logo />
       <div className="container">
         <Switch>
           <Route path="/" component={Home} exact />
-          <Route path="/about" component={About} />
+          <Route path="/dashboard" component={DashboardPage} />
         </Switch>
       </div>
     </BrowserRouter>

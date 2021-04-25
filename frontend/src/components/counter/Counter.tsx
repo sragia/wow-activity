@@ -1,10 +1,12 @@
 import React, { Fragment } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { actionTypes, selectors } from '../../features/counter'
+import { selectors as userSelectors } from '../../features/user'
 import { UserActions } from '../../features/user/actionTypes'
 
 const Counter: React.FC = () => {
   const count = useSelector(selectors.getCountValue)
+  const user = useSelector(userSelectors.getUser)
   const dispatch = useDispatch()
 
   return (
@@ -44,7 +46,12 @@ const Counter: React.FC = () => {
                 >
                   increment
                 </button>
-
+                {user && (
+                  <div>
+                    {user.username}
+                    {user.avatar}
+                  </div>
+                )}
                 <button
                   className="waves-effect waves-teal btn-flat red"
                   type="button"

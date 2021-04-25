@@ -2,6 +2,7 @@ export interface LoginResponse {
   expires: string
   expiresPrettyPrint: string
   token: string
+  username: string
 }
 
 export interface LoginErrorResponse {

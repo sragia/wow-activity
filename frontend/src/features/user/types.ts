@@ -59,5 +59,7 @@ export type UserActionTypes =
   | SetUserAction
 
 export interface SystemState {
-  user: User
+  user: {
+    user: User
+  }
 }

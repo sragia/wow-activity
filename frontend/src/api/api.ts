@@ -1,6 +1,7 @@
 /* eslint class-methods-use-this: ["error", { "exceptMethods": ["fetch"] }] */
 
-import axios, { Method } from 'axios'
+import { Method } from 'axios'
+import { ajax } from 'rxjs/ajax'
 
 const ENDPOINT = process.env.REACT_APP_API_ENDPOINT
 
@@ -28,15 +29,20 @@ class Api {
     )
   }
 
+  profile(username: string) {
+    return this.fetch(`profile/${username}`)
+  }
+
   fetch(
     uri: string,
-    payload: { [index: string]: any },
+    payload?: { [index: string]: any },
     method: Method = 'GET'
   ) {
-    return axios({
+    return ajax({
       url: `${ENDPOINT}${uri}`,
       method,
-      data: payload,
+      withCredentials: true,
+      ...(payload ? { body: payload } : null),
     })
   }
 }

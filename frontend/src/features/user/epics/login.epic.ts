@@ -1,16 +1,21 @@
-import { of } from 'rxjs'
-import { mergeMap, filter } from 'rxjs/operators'
+import { mergeMap, filter, map } from 'rxjs/operators'
 import api from '../../../api/api'
 import { UserActions } from '../actionTypes'
 import { UserActionTypes } from '../types'
 
-export function login(action$: any) {
+export function loginAction(action$: any) {
   return action$.pipe(
     filter((action: UserActionTypes) => action.type === UserActions.Login),
-    mergeMap(async ({ payload }) => {
-      const res = await api.login(payload.username, payload.password)
-      console.log(res)
-      return of({ type: UserActions.LoginSuccess, payload: {} })
+    mergeMap(({ payload }) => {
+      const res = api.login(payload.username, payload.password)
+      return res.pipe(
+        map((response) => {
+          return {
+            type: UserActions.LoginSuccess,
+            payload: { ...response.response, username: payload.username },
+          }
+        })
+      )
     })
   )
 }

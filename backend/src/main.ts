@@ -6,7 +6,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
 
-const jwt = require('express-jwt');
+const cors = require('cors');
 
 /**
  * The endpoint for open api ui
@@ -45,6 +45,12 @@ export const SWAGGER_API_CURRENT_VERSION = '1.0';
   app.enableCors();
   app.use(headers());
   app.use(cookieParser());
+  app.use(
+    cors({
+      credentials: true,
+      origin: 'http://localhost:3000',
+    }),
+  );
   app.use(
     rateLimiter({
       windowMs: 60, // 1 minutes
