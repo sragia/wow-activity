@@ -9,7 +9,7 @@ export const Search = () => {
   }
 
   const onClick = () => {
-    console.log(value)
+    // console.log(value)
   }
 
   return (
