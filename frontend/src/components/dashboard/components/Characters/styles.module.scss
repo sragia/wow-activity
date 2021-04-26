@@ -1,0 +1,20 @@
+.wrapper {
+}
+
+.nav {
+  display: flex;
+  justify-content: flex-end;
+  button {
+    background: #f9ebe0;
+    color: #080708;
+    border: none;
+    padding: 2px 5px;
+    font-weight: 400;
+    cursor: pointer;
+  }
+}
+
+.accent {
+  color: #fe5e41;
+  font-weight: 600;
+}

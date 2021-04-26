@@ -29,7 +29,7 @@ export const Login = () => {
       type: UserActions.Login,
       payload: { username: form.username, password: form.password },
     })
-    push('/dashboard')
+    push('/dashboard') // TODO: Move this to LoginSuccess
   }
 
   return (

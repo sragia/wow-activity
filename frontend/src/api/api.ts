@@ -29,6 +29,14 @@ class Api {
     )
   }
 
+  selfProfile() {
+    return this.fetch(`profile`)
+  }
+
+  logout() {
+    return this.fetch('auth/logout', undefined, 'POST')
+  }
+
   profile(username: string) {
     return this.fetch(`profile/${username}`)
   }

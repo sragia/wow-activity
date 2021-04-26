@@ -1,13 +1,17 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Loader from 'react-loader-spinner'
-import { Transition } from 'react-transition-group'
-import { Route, Switch } from 'react-router-dom'
+import { Transition, CSSTransition } from 'react-transition-group'
+import { Route } from 'react-router-dom'
 import { selectors as userSelectors } from '../../features/user'
 
 import styles from './styles.module.scss'
+import './styles.global.scss'
 import { Search } from './components/Search/Search'
 import { Menu } from './components/Menu/Menu'
+import { UserActions } from '../../features/user/actionTypes'
+import { Characters } from './components/Characters/Characters'
+import { Overview } from './components/Overview/Overview'
 
 const duration = 400
 
@@ -23,8 +27,19 @@ const transitionStyles: { [index: string]: any } = {
   exited: { opacity: 0 },
 }
 
+const routes = [
+  { path: '/dashboard/characters', name: 'characters', Component: Characters },
+  { path: '/dashboard', name: 'overview', Component: Overview },
+]
+
 export const Dashboard = () => {
   const user = useSelector(userSelectors.getUser)
+  const [expanded, setExpanded] = useState(false)
+  const dispatch = useDispatch()
+
+  const onLogout = () => {
+    dispatch({ type: UserActions.Logout })
+  }
 
   return (
     <>
@@ -43,15 +58,51 @@ export const Dashboard = () => {
                     <span>logged</span>
                     <span className={styles.accent}>in</span>
                     <span>as</span>
-                    <span className={styles.username}>{user.username}</span>
+                    <button
+                      type="button"
+                      onClick={() => setExpanded(!expanded)}
+                      className={styles.username}
+                    >
+                      {user.username}
+                    </button>
+                    {expanded && (
+                      <div className={styles.navDropdown}>
+                        <button
+                          type="button"
+                          className={styles.option}
+                          onClick={onLogout}
+                        >
+                          logout
+                        </button>
+                      </div>
+                    )}
                   </div>
                   <div className={styles.body}>
                     <Search />
                     <div className={styles.content}>
                       <Menu />
-                      <Switch>
-                        <Route path="/dashboard/characters" exact />
-                      </Switch>
+                      {routes.map(({ path, Component }) => (
+                        <Route key={path} exact path={path}>
+                          {({ match }) => {
+                            return (
+                              <CSSTransition
+                                in={match != null}
+                                timeout={300}
+                                classNames="switch"
+                                unmountOnExit
+                              >
+                                <div
+                                  className={['switch', styles.switch].join(
+                                    ' '
+                                  )}
+                                >
+                                  <Component />
+                                </div>
+                              </CSSTransition>
+                            )
+                          }}
+                        </Route>
+                      ))}
                     </div>
                   </div>
                 </>

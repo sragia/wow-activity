@@ -15,6 +15,10 @@
   span {
     align-self: center;
   }
+
+  button {
+    cursor: pointer;
+  }
 }
 
 .accent {
@@ -26,6 +30,20 @@
   background: #19647e;
   font-weight: 500;
   padding: 0 4px;
+  border: none;
+  color: #f9ebe0;
+}
+
+.navDropdown {
+  position: absolute;
+  right: 20px;
+  top: 50px;
+
+  button {
+    background: #fe5e41;
+    border: 0;
+    color: #f9ebe0;
+  }
 }
 
 .body {
@@ -40,4 +58,13 @@
 
 .content {
   padding: 10px;
+  display: flex;
+  position: relative;;
+
+  .switch {
+    position: absolute;
+    width: 90%;
+    right: 20px;
+    top: 20px;
+  }
 }

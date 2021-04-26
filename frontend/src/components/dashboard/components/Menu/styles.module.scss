@@ -6,7 +6,7 @@
     text-decoration: none;
   }
   span {
-    background: #fe5e41;
+    background: #555B6E;
     padding: 0 3px;
     font-size: 14px;
     color: #f9ebe0;
@@ -15,6 +15,7 @@
 
 .active {
   span {
+    color: #f9ebe0;
     background: #28afb0;
   }
 }

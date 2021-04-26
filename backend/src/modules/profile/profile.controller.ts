@@ -6,6 +6,7 @@ import {
   Get,
   Param,
   Patch,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
@@ -15,6 +16,7 @@ import { ProfileService, IGenericMessageBody } from './profile.service';
 import { PatchProfilePayload } from './payload/patch.profile.payload';
 import { Profile } from './profile.entity';
 import { JwtService } from '@nestjs/jwt';
+import { Request } from 'express';
 
 /**
  * Profile Controller
@@ -28,6 +30,22 @@ export class ProfileController {
    * @param profileService
    */
   constructor(private readonly profileService: ProfileService) {}
+
+  @Get()
+  @UseGuards(AuthGuard('jwt'))
+  @ApiResponse({ status: 200, description: 'Fetch Profile Request Received' })
+  @ApiResponse({ status: 400, description: 'Fetch Profile Request Failed' })
+  async getSelfProfile(@Req() request: Request): Promise<Profile> {
+    const username = request.cookies?.username;
+    if (!username) {
+      throw new BadRequestException(
+        'The profile with that username could not be found.',
+      );
+    }
+    const profile = await this.profileService.getByUsername(username);
+    delete profile.password;
+    return profile;
+  }
 
   /**
    * Retrieves a particular profile

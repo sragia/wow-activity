@@ -22,6 +22,7 @@ export const Menu = () => {
         <Link
           to={item.url}
           className={location.pathname === item.url ? styles.active : undefined}
+          key={item.url}
         >
           {item.name}
         </Link>

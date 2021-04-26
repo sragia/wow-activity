@@ -37,7 +37,17 @@ export class AuthController {
     const profile = await this.authService.validateUser(payload);
     const token = await this.authService.createToken(profile);
     response.cookie('token', token.token, { httpOnly: true });
+    response.cookie('username', profile.username, { httpOnly: true });
     return token;
+  }
+
+  @Post('logout')
+  @ApiResponse({ status: 201, description: 'Logout Completed' })
+  @ApiResponse({ status: 400, description: 'Bad Request' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  async logout(@Res({ passthrough: true }) response: Response): Promise<void> {
+    response.cookie('token', undefined, { httpOnly: true });
+    response.cookie('username', undefined, { httpOnly: true });
   }
 
   /**

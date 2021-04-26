@@ -9,5 +9,9 @@ export const UserActions = {
   RegisterSuccess: 'UserActions/RegisterSuccess',
   RegisterError: 'UserActions/RegisterError',
 
+  Init: 'UserActions/Init',
+  InitError: 'UserActions/InitError',
+
   GetUser: 'UserActions/GetUser',
+  Logout: 'UserActions/Logout',
 }
