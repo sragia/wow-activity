@@ -38,7 +38,7 @@ export class ProfileService {
     private readonly profileRepository: Repository<Profile>,
     @InjectRepository(Roles)
     private readonly rolesRepository: Repository<Roles>,
-  ) {}
+  ) { }
 
   /**
    * Fetches profile from database by UUID
@@ -55,7 +55,7 @@ export class ProfileService {
    * @returns {Promise<Profile>} data from queried profile
    */
   getByUsername(username: string): Promise<Profile> {
-    return this.profileRepository.findOne({ username });
+    return this.profileRepository.findOne({ username }, { relations: ['characters'] });
   }
 
   /**

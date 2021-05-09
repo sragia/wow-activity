@@ -1,7 +1,8 @@
 import { Exclude } from 'class-transformer';
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany } from 'typeorm';
 import { PasswordTransformer } from './password.transformer';
 import { Roles } from '../app/roles.entity';
+import { Character } from '../character/character.entity';
 
 /**
  * Profile Entity Class
@@ -39,6 +40,9 @@ export class Profile {
    */
   @OneToMany(type => Roles, role => role.profile)
   roles: Roles[];
+
+  @ManyToMany(type => Character, character => character.profiles)
+  characters: Character[];
 
   /**
    * Column that employs the PasswordTransformer to hash passwords before writing to database
