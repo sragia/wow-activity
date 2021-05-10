@@ -17,6 +17,7 @@ export type TClass =
   | 'Death Knight'
 
 export enum ECovenant {
+  'IGNORE',
   'Kyrian',
   'Venthyr',
   'Night Fae',
@@ -45,4 +46,5 @@ export interface ICharacter {
   avarageItemLevel: number
   equippedItemLevel: number
   status: ECharacterStatus
+  imgUrl?: string
 }

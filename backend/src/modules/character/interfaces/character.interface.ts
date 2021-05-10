@@ -44,4 +44,5 @@ export interface CharacterPayload {
   lastLogin?: string;
   avarageItemLevel: number;
   equippedItemLevel: number;
+  imgUrl?: string;
 }

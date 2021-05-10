@@ -46,7 +46,7 @@ export const CharacterTableRow = ({ char }: Props) => (
       </span>
     </div>
     <div className={styles.viewCol}>
-      <Link to={`/dashboard/characters/${char.id}`} className={styles.viewLink}>
+      <Link to={`/dashboard/character/${char.id}`} className={styles.viewLink}>
         <span>view</span>
       </Link>
     </div>

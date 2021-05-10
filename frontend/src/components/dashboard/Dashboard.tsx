@@ -13,6 +13,7 @@ import { Menu } from './components/Menu/Menu'
 import { UserActions } from '../../features/user/actionTypes'
 import { Characters } from './components/Characters/Characters'
 import { Overview } from './components/Overview/Overview'
+import { Character } from './components/Character/Character'
 
 const duration = 400
 
@@ -40,6 +41,12 @@ const routes = [
     name: 'overview',
     Component: Overview,
     title: 'Overview - wowactivity',
+  },
+  {
+    path: '/dashboard/character/:id',
+    name: 'character',
+    Component: Character,
+    title: 'Character - wowactivity',
   },
 ]
 
@@ -110,7 +117,7 @@ export const Dashboard = () => {
                                   <Helmet>
                                     <title>{title}</title>
                                   </Helmet>
-                                  <Component />
+                                  <Component params={match?.params} />
                                 </div>
                               </CSSTransition>
                             )

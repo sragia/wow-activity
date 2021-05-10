@@ -27,6 +27,10 @@ export class CharacterService {
     return null;
   }
 
+  async getCharacterById(id: number) {
+    return await this.characterRepository.findOne(id);
+  }
+
   async create(payload: CharacterPayload, user: Profile) {
     const character = await this.getCharacterByNameRealm(
       payload.name,

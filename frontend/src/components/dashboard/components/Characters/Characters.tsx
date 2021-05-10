@@ -71,6 +71,11 @@ export const Characters = () => {
         {characters.map((char) => (
           <CharacterTableRow key={char.id} char={char} />
         ))}
+        {!characters.length && (
+          <div className={styles.noCharNotice}>
+            <span>No characters have been added</span>
+          </div>
+        )}
       </div>
     </div>
   )

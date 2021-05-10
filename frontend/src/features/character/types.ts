@@ -1,5 +1,5 @@
 import { ICharacter } from '../../interfaces/character.interface'
-import { StatusType } from '../global-types';
+import { StatusType } from '../global-types'
 import { CharacterAction } from './actionTypes'
 
 interface GetCharactersSuccessAction {
@@ -8,35 +8,48 @@ interface GetCharactersSuccessAction {
 }
 
 interface GetCharactersAction {
-  type: typeof CharacterAction.GetCharacters,
+  type: typeof CharacterAction.GetCharacters
   payload: null
 }
 
 interface SetStatusAction {
-  type: typeof CharacterAction.SetStatus,
+  type: typeof CharacterAction.SetStatus
   payload: StatusType
 }
 
 interface AddCharacterAction {
-  type: typeof CharacterAction.SetStatus,
-  payload: { name: string, realm: string }
+  type: typeof CharacterAction.SetStatus
+  payload: { name: string; realm: string }
 }
 
 interface AddCharacterSuccessAction {
-  type: typeof CharacterAction.SetStatus,
+  type: typeof CharacterAction.SetStatus
   payload: null
 }
 
+interface GetCharacterAction {
+  type: typeof CharacterAction.GetCharacter
+  payload: number
+}
+
+interface GetCharacterSuccessAction {
+  type: typeof CharacterAction.GetCharacterSuccess
+  payload: ICharacter
+}
+
 export type CharacterActionTypes =
-  GetCharactersSuccessAction |
-  GetCharactersAction |
-  SetStatusAction |
-  AddCharacterAction |
-  AddCharacterSuccessAction
+  | GetCharactersSuccessAction
+  | GetCharactersAction
+  | SetStatusAction
+  | AddCharacterAction
+  | AddCharacterSuccessAction
+  | GetCharacterAction
+  | GetCharacterSuccessAction
 
 export interface SystemState {
   character: {
-    characters: ICharacter[];
-    status: StatusType;
+    characters: ICharacter[]
+    character: ICharacter
+    status: StatusType
   }
 }

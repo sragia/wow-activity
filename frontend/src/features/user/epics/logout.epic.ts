@@ -18,6 +18,9 @@ export function logoutUser(action$: any) {
               type: UserActions.SetUser,
               payload: null,
             },
+            {
+              type: UserActions.LogoutSuccess,
+            },
             push('/')
           )
         }),

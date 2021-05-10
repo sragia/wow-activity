@@ -13,13 +13,10 @@ export function initUser(action$: any) {
       const res = api.selfProfile()
       return res.pipe(
         mergeMap((response) => {
-          return of(
-            {
-              type: UserActions.SetUser,
-              payload: response.response,
-            },
-            push('/dashboard')
-          )
+          return of({
+            type: UserActions.SetUser,
+            payload: response.response,
+          })
         }),
         catchError(() => {
           // do nothing

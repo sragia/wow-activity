@@ -1,0 +1,78 @@
+.header {
+  display: flex;
+  h3 {
+    display: flex;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 300;
+    .name {
+      font-size: 24px;
+      font-weight: 500;
+      align-self: center;
+      padding: 0 5px;
+      margin-right: 3px;
+      transition: all ease-in-out 0.3s;
+    }
+    span {
+      align-self: center;
+    }
+  }
+}
+
+.class {
+  margin-top: 0;
+}
+
+.className {
+  padding: 0 3px;
+  margin-left: 3px;
+}
+
+.colOne {
+  font-weight: 500;
+  font-size: 11px;
+  > div {
+    margin-top: 2px;
+  }
+}
+
+.guild {
+  color: #fdca40;
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+
+.equippedIlvl {
+  margin: 0 3px;
+  padding: 0 3px;
+}
+
+.colImg {
+  flex: 0 100px;
+  max-width: 100px;
+  width: 100px;
+  max-height: 150px;
+  overflow: hidden;
+  margin-right: 20px;
+  transition: all ease-in-out 0.4s;
+  img {
+    width: 120px;
+    height: 350px;
+    position: relative;
+    object-fit: cover;
+    top: -73px;
+    pointer-events: none;
+  }
+}
+
+.lastLogin {
+  padding: 0 3px;
+  margin-left: 3px;
+  background-color: #f9ebe0;
+  color: #080708;
+}
+
+.covenant {
+  margin-left: 3px;
+  padding: 0 3px;
+}

@@ -14,4 +14,5 @@ export const UserActions = {
 
   GetUser: 'UserActions/GetUser',
   Logout: 'UserActions/Logout',
+  LogoutSuccess: 'UserActions/LogoutSuccess',
 }

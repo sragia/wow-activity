@@ -45,6 +45,10 @@ class Api {
     return this.fetch(`character`)
   }
 
+  getCharacter(id: number) {
+    return this.fetch(`character/${id}`)
+  }
+
   addCharacter(payload: { name: string; realm: string }) {
     return this.fetch('character/add', payload, 'POST')
   }

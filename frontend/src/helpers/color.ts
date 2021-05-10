@@ -162,3 +162,85 @@ export const getRandomColor = () => {
   const { r, g, b } = HSLtoRGB(h, s, l)
   return RGBToHex(r, g, b)
 }
+
+export const getClassColor = (className?: string) => {
+  switch (className?.replace(' ', '').toLowerCase()) {
+    case 'paladin':
+      return '#f48cba'
+    case 'deathknight':
+      return '#c41e3a'
+    case 'demonhunter':
+      return '#a330c9'
+    case 'druid':
+      return '#ff7c0a'
+    case 'hunter':
+      return '#aad372'
+    case 'mage':
+      return '#3fc7eb'
+    case 'monk':
+      return '#00ff98'
+    case 'priest':
+      return '#ffffff'
+    case 'rogue':
+      return '#fff468'
+    case 'shaman':
+      return '#0070dd'
+    case 'warlock':
+      return '#8788ee'
+    case 'warrior':
+      return '#c69b6d'
+    default:
+      return '#ffffff'
+  }
+}
+
+export const getClassOppositeColor = (className?: string) => {
+  switch (className?.replace(' ', '').toLowerCase()) {
+    case 'paladin':
+      return '#F9EBE0'
+    case 'deathknight':
+      return '#F9EBE0'
+    case 'demonhunter':
+      return '#F9EBE0'
+    case 'druid':
+      return '#F9EBE0'
+    case 'hunter':
+      return '#F9EBE0'
+    case 'mage':
+      return '#F9EBE0'
+    case 'monk':
+      return '#F9EBE0'
+    case 'priest':
+      return '#080708'
+    case 'rogue':
+      return '#F9EBE0'
+    case 'shaman':
+      return '#F9EBE0'
+    case 'warlock':
+      return '#F9EBE0'
+    case 'warrior':
+      return '#F9EBE0'
+    default:
+      return '#F9EBE0'
+  }
+}
+
+export const getCovenantColor = (covenantId: number) => {
+  switch (covenantId) {
+    case 1:
+      // Kyrian
+      return '#0ad0f7'
+    case 2:
+      // Venthyr
+      return '#e62727'
+    case 3:
+      // Night Fae
+      return '#8311ed'
+    case 4:
+      // Necrolord
+      return '#00914b'
+
+    default:
+      return '#ffffff'
+  }
+}

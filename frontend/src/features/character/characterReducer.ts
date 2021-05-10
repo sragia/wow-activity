@@ -5,6 +5,7 @@ import { CharacterActionTypes } from './types'
 const initialState = {
   characters: [],
   status: StatusType.IDLE,
+  character: null,
 }
 
 export default (state = initialState, action: CharacterActionTypes) => {
@@ -13,6 +14,8 @@ export default (state = initialState, action: CharacterActionTypes) => {
       return { ...state, characters: action.payload }
     case CharacterAction.SetStatus:
       return { ...state, status: action.payload }
+    case CharacterAction.GetCharacterSuccess:
+      return { ...state, character: action.payload }
     default:
       return state
   }

@@ -6,6 +6,7 @@ import { CounterReducer } from './features/counter'
 import { UserReducer } from './features/user'
 import { CharacterReducer } from './features/character'
 import { rootEpics } from './features/epics'
+import { UserActions } from './features/user/actionTypes'
 
 /* eslint-disable import/no-extraneous-dependencies */
 export const history = createBrowserHistory()
@@ -18,10 +19,20 @@ const rootReducer = (his: any) =>
     router: connectRouter(his),
   })
 
+const resetEnhancer = (rootRed: any) => (state: any, action: any) => {
+  if (action.type !== UserActions.LogoutSuccess) {
+    return rootRed(state, action)
+  }
+
+  const newState = rootRed(undefined, {})
+  newState.routed = state.router
+  return newState
+}
+
 const epicMiddleware = createEpicMiddleware()
 
 const store = createStore(
-  rootReducer(history),
+  resetEnhancer(rootReducer(history)),
   compose(applyMiddleware(routerMiddleware(history), epicMiddleware))
 )
 

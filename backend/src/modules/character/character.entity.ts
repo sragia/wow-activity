@@ -67,6 +67,9 @@ export class Character {
   @Column({ nullable: true, default: ECharacterStatus.NEW })
   status: ECharacterStatus;
 
+  @Column({ nullable: true })
+  imgUrl?: string;
+
   @Column({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP',

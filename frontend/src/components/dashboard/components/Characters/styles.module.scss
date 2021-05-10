@@ -71,3 +71,15 @@
     outline: none;
   }
 }
+
+.noCharNotice {
+  text-align: center;
+  font-size: 13px;
+  margin-top: 40px;
+  span {
+    background-color: #fb3640;
+    padding: 0 5px;
+    font-weight: 500;
+    color: #f9ebe0;
+  }
+}

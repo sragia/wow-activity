@@ -1,4 +1,4 @@
-import { BadRequestException, Get, Req } from '@nestjs/common';
+import { BadRequestException, Get, Param, Req } from '@nestjs/common';
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -39,6 +39,11 @@ export class CharacterController {
     const username = request.cookies?.username;
 
     const profile = await this.profileService.getByUsername(username);
+    const media = await this.bnetService.getCharacterMedia(
+      payload.name,
+      payload.realm,
+      payload.region,
+    );
 
     return this.characterService.create(
       {
@@ -56,6 +61,7 @@ export class CharacterController {
         lastLogin: character.last_login_timestamp,
         avarageItemLevel: character.average_item_level,
         equippedItemLevel: character.equipped_item_level,
+        imgUrl: media.assets?.find((asset) => asset.key === 'main')?.value,
       },
       profile,
     );
@@ -69,5 +75,23 @@ export class CharacterController {
     const profile = await this.profileService.getByUsername(username);
 
     return profile.characters;
+  }
+
+  @Get(':id')
+  @UseGuards(AuthGuard('jwt'))
+  async getCharacter(
+    @Param('id') id: string,
+    @Req() request: Request,
+  ): Promise<Character> {
+    const username = request.cookies?.username;
+
+    const profile = await this.profileService.getByUsername(username);
+    const character = profile.characters.find(
+      (char) => char.id === parseInt(id, 10),
+    );
+    if (!character) {
+      throw new BadRequestException('Couldnt find character');
+    }
+    return character;
   }
 }
