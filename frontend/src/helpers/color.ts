@@ -213,7 +213,7 @@ export const getClassOppositeColor = (className?: string) => {
     case 'priest':
       return '#080708'
     case 'rogue':
-      return '#F9EBE0'
+      return '#080708'
     case 'shaman':
       return '#F9EBE0'
     case 'warlock':
