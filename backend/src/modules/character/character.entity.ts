@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { Profile } from '../profile/profile.entity';
 import {
+  ECharacterStatus,
   ECovenant,
   TClass,
   TCovenant,
@@ -62,6 +63,16 @@ export class Character {
 
   @Column()
   equippedItemLevel: number;
+
+  @Column({ nullable: true, default: ECharacterStatus.NEW })
+  status: ECharacterStatus;
+
+  @Column({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+    onUpdate: 'CURRENT_TIMESTAMP',
+  })
+  lastUpdated: Date;
 
   @ManyToMany((type) => Profile, (profile) => profile.characters)
   @JoinTable()
