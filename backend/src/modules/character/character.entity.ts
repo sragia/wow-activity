@@ -1,9 +1,21 @@
-import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Profile } from "../profile/profile.entity";
-import { ECovenant, TClass, TCovenant, TFaction } from "./interfaces/character.interface";
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Profile } from '../profile/profile.entity';
+import {
+  ECovenant,
+  TClass,
+  TCovenant,
+  TFaction,
+} from './interfaces/character.interface';
 
 @Entity({
-  name: 'characters'
+  name: 'characters',
 })
 export class Character {
   @PrimaryGeneratedColumn()
@@ -51,7 +63,7 @@ export class Character {
   @Column()
   equippedItemLevel: number;
 
-  @ManyToMany(type => Profile, profile => profile.characters)
+  @ManyToMany((type) => Profile, (profile) => profile.characters)
   @JoinTable()
   profiles: Profile[];
 }

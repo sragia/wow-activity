@@ -41,6 +41,14 @@ class Api {
     return this.fetch(`profile/${username}`)
   }
 
+  getCharacters() {
+    return this.fetch(`character`)
+  }
+
+  addCharacter(payload: { name: string; realm: string }) {
+    return this.fetch('character/add', payload, 'POST')
+  }
+
   fetch(
     uri: string,
     payload?: { [index: string]: any },

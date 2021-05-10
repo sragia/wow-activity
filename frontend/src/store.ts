@@ -4,6 +4,7 @@ import { createBrowserHistory } from 'history'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 import { CounterReducer } from './features/counter'
 import { UserReducer } from './features/user'
+import { CharacterReducer } from './features/character'
 import { rootEpics } from './features/epics'
 
 /* eslint-disable import/no-extraneous-dependencies */
@@ -13,6 +14,7 @@ const rootReducer = (his: any) =>
   combineReducers({
     count: CounterReducer,
     user: UserReducer,
+    character: CharacterReducer,
     router: connectRouter(his),
   })
 

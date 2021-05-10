@@ -15,7 +15,6 @@ export class AddCharacterPayload {
    * Character Name
    */
   @ApiProperty()
-  @IsAlphanumeric()
   @IsNotEmpty()
   name: string;
 
@@ -25,10 +24,8 @@ export class AddCharacterPayload {
   @ApiProperty({
     required: true,
   })
-  @IsAlphanumeric()
   @IsNotEmpty()
   realm: string;
-
 
   /**
    * Character Realm
