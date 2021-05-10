@@ -69,6 +69,7 @@ export const CharacterHeader = ({ character }: Props) => {
             className={clsx(styles.className)}
             style={{
               backgroundColor: getClassColor(character?.class),
+              color: getClassOppositeColor(character?.class),
             }}
           >
             {character?.class}
@@ -81,7 +82,6 @@ export const CharacterHeader = ({ character }: Props) => {
               className={clsx(styles.covenant)}
               style={{
                 backgroundColor: getCovenantColor(character?.covenant),
-                color: getClassOppositeColor(character?.class),
               }}
             >
               {ECovenant[character?.covenant]}
