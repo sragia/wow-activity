@@ -1,0 +1,116 @@
+.item {
+  font-size: 14px;
+  color: #f9ebe0;
+  font-weight: 300;
+  margin-bottom: 5px;
+  display: flex;
+}
+
+.name {
+  background: #f9ebe0;
+  color: #080708;
+  font-weight: 600;
+  padding: 0 3px;
+  margin-right: 3px;
+
+  &.paladin {
+    background-color: #f48cba;
+  }
+  &.deathknight {
+    background-color: #c41e3a;
+  }
+  &.demonhunter {
+    background-color: #a330c9;
+  }
+  &.druid {
+    background-color: #ff7c0a;
+  }
+  &.hunter {
+    background-color: #aad372;
+  }
+  &.mage {
+    background-color: #3fc7eb;
+  }
+  &.monk {
+    background-color: #00ff98;
+  }
+  &.priest {
+    background-color: #ffffff;
+  }
+  &.rogue {
+    background-color: #fff468;
+  }
+  &.shaman {
+    background-color: #0070dd;
+  }
+  &.warlock {
+    background-color: #8788ee;
+  }
+  &.warrior {
+    background-color: #c69b6d;
+  }
+}
+
+.header {
+  display: flex;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.col {
+  color: #080708;
+  background-color: #f9ebe0;
+  padding: 0 5px;
+}
+
+.nameCol {
+  flex: 0 33%;
+}
+
+.ilvlCol {
+  flex: 0 10%;
+}
+
+.guildCol {
+  flex: 0 37%;
+}
+
+.statusCol {
+  flex: 0 15%;
+}
+
+.viewCol {
+  flex: 0 5%;
+  justify-content: flex-end;
+  display: flex;
+}
+
+.equippedIlvl {
+  font-weight: 500;
+  padding: 0 4px;
+  margin-right: 3px;
+}
+
+.avarageIlvl {
+  font-size: 10px;
+}
+
+.viewLink {
+  text-decoration: none;
+  color: #080708;
+  background: #f9ebe0;
+  padding: 0 3px;
+  font-weight: 500;
+}
+
+.statusDisplay {
+  font-weight: 500;
+  padding: 0 3px;
+  &--new {
+    background: #ffd23f;
+    color: #080708;
+  }
+  &--ready {
+    background: #329f5b;
+  }
+}

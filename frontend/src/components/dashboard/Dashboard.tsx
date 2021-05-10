@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loader from 'react-loader-spinner'
 import { Transition, CSSTransition } from 'react-transition-group'
 import { Route } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 import { selectors as userSelectors } from '../../features/user'
 
 import styles from './styles.module.scss'
@@ -28,8 +29,18 @@ const transitionStyles: { [index: string]: any } = {
 }
 
 const routes = [
-  { path: '/dashboard/characters', name: 'characters', Component: Characters },
-  { path: '/dashboard', name: 'overview', Component: Overview },
+  {
+    path: '/dashboard/characters',
+    name: 'characters',
+    Component: Characters,
+    title: 'Characters - wowactivity',
+  },
+  {
+    path: '/dashboard',
+    name: 'overview',
+    Component: Overview,
+    title: 'Overview - wowactivity',
+  },
 ]
 
 export const Dashboard = () => {
@@ -81,7 +92,7 @@ export const Dashboard = () => {
                     <Search />
                     <div className={styles.content}>
                       <Menu />
-                      {routes.map(({ path, Component }) => (
+                      {routes.map(({ path, Component, title }) => (
                         <Route key={path} exact path={path}>
                           {({ match }) => {
                             return (
@@ -96,6 +107,9 @@ export const Dashboard = () => {
                                     ' '
                                   )}
                                 >
+                                  <Helmet>
+                                    <title>{title}</title>
+                                  </Helmet>
                                   <Component />
                                 </div>
                               </CSSTransition>

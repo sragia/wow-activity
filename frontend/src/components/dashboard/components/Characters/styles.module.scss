@@ -1,13 +1,3 @@
-.wrapper {
-}
-
-.loader {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-
 .nav {
   display: flex;
   justify-content: flex-end;
@@ -28,62 +18,7 @@
 }
 
 .items {
-  padding-left: 10px;;
-}
-
-
-.item {
-  font-size: 14px;
-  color: #f9ebe0;
-  font-weight: 300;
-  margin-bottom: 3px;
-}
-
-.name {
-  background: #f9ebe0;
-  color: #080708;
-  font-weight: 600;
-  padding: 0 3px;
-  margin-right: 3px;
-
-
-  &.paladin {
-    background-color: #F48CBA;
-  }
-  &.deathknight {
-    background-color: #C41E3A;
-  }
-  &.demonhunter {
-    background-color: #A330C9;
-  }
-  &.druid {
-    background-color: #FF7C0A;
-  }
-  &.hunter {
-    background-color: #AAD372;
-  }
-  &.mage {
-    background-color: #3FC7EB;
-  }
-  &.monk {
-    background-color: #00FF98;
-  }
-  &.priest {
-    background-color: #FFFFFF;
-  }
-  &.rogue {
-    background-color: #FFF468;
-  }
-  &.shaman {
-    background-color: #0070DD;
-  }
-  &.warlock {
-    background-color: #8788EE;
-  }
-  &.warrior {
-    background-color: #C69B6D;
-  }
-
+  padding: 10px;
 }
 
 .addForm {
@@ -94,7 +29,6 @@
   padding: 10px;
   border-radius: 5px;
 
-  
   button {
     width: 100%;
     transition: all ease-in-out 0.2s;
@@ -128,7 +62,6 @@
     margin-right: 5px;
   }
   input {
-
     color: #080708;
     background: #f9ebe0;
     max-width: 150px;
@@ -137,5 +70,4 @@
     border: none;
     outline: none;
   }
-
 }

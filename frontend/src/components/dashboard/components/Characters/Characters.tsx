@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import Loader from 'react-loader-spinner'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectors } from '../../../../features/character'
 import { CharacterAction } from '../../../../features/character/actionTypes'
 import { StatusType } from '../../../../features/global-types'
+import { Loading } from '../../../loader/loader'
+import { CharacterTableHeader } from './components/table/TableHeader'
+import { CharacterTableRow } from './components/table/TableRow'
 
 import styles from './styles.module.scss'
 
@@ -18,7 +20,7 @@ export const Characters = () => {
   const status = useSelector(selectors.getStatus)
 
   useEffect(() => {
-    if (!characters.length) {
+    if (!characters.length && status !== StatusType.PENDING) {
       dispatch({ type: CharacterAction.GetCharacters })
     }
   }, [])
@@ -63,29 +65,13 @@ export const Characters = () => {
           </form>
         )}
       </div>
-      {(status === StatusType.PENDING && (
-        <div className={styles.loader}>
-          <Loader type="Bars" color="#FE5E41" height="50" width="50" />
-        </div>
-      )) || (
-        <div className={styles.items}>
-          {characters.map((char) => (
-            <div className={styles.item} key={char.id}>
-              <div className={styles.characterName}>
-                <span
-                  className={[
-                    styles.name,
-                    styles[char.class.replace(' ', '').toLowerCase()],
-                  ].join(' ')}
-                >
-                  {char.name}
-                </span>
-                {char.realm}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      <Loading show={status === StatusType.PENDING} overlay duration={300} />
+      <div className={styles.items}>
+        <CharacterTableHeader />
+        {characters.map((char) => (
+          <CharacterTableRow key={char.id} char={char} />
+        ))}
+      </div>
     </div>
   )
 }
