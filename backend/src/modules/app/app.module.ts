@@ -13,6 +13,7 @@ import { AccessControlModule } from 'nest-access-control';
 import { roles } from './app.roles';
 import { BnetModule } from '../bnet/bnet.module';
 import { CharacterModule } from '../character/character.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -39,46 +40,51 @@ import { CharacterModule } from '../character/character.module';
       useFactory: (configService: ConfigService) => {
         return configService.isEnv('dev')
           ? {
-            level: 'info',
-            format: winston.format.json(),
-            defaultMeta: { service: 'user-service' },
-            transports: [
-              new winston.transports.Console({
-                format: winston.format.simple(),
-              }),
-            ],
-          }
+              level: 'info',
+              format: winston.format.json(),
+              defaultMeta: { service: 'user-service' },
+              transports: [
+                new winston.transports.Console({
+                  format: winston.format.simple(),
+                }),
+              ],
+            }
           : {
-            level: 'info',
-            format: winston.format.json(),
-            defaultMeta: { service: 'user-service' },
-            transports: [
-              new winston.transports.File({
-                filename: 'logs/error.log',
-                level: 'error',
-              }),
-              new winston.transports.Console({
-                format: winston.format.simple(),
-              }),
-              new rotateFile({
-                filename: 'logs/application-%DATE%.log',
-                datePattern: 'YYYY-MM-DD',
-                zippedArchive: true,
-                maxSize: '20m',
-                maxFiles: '14d',
-              }),
-            ],
-          };
+              level: 'info',
+              format: winston.format.json(),
+              defaultMeta: { service: 'user-service' },
+              transports: [
+                new winston.transports.File({
+                  filename: 'logs/error.log',
+                  level: 'error',
+                }),
+                new winston.transports.Console({
+                  format: winston.format.simple(),
+                }),
+                new rotateFile({
+                  filename: 'logs/application-%DATE%.log',
+                  datePattern: 'YYYY-MM-DD',
+                  zippedArchive: true,
+                  maxSize: '20m',
+                  maxFiles: '14d',
+                }),
+              ],
+            };
       },
     }),
+    ScheduleModule.forRoot(),
     AccessControlModule.forRoles(roles),
     ConfigModule,
     AuthModule,
     ProfileModule,
     BnetModule,
-    CharacterModule
+    CharacterModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    console.log('');
+  }
+}
