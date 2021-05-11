@@ -13,6 +13,15 @@ export function initUser(action$: any) {
       const res = api.selfProfile()
       return res.pipe(
         mergeMap((response) => {
+          if (window.location.pathname === '/') {
+            return of(
+              {
+                type: UserActions.SetUser,
+                payload: response.response,
+              },
+              push('/dashboard')
+            )
+          }
           return of({
             type: UserActions.SetUser,
             payload: response.response,
