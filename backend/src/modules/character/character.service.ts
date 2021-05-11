@@ -6,6 +6,7 @@ import { Character } from './character.entity';
 import { CharacterPayload } from './interfaces/character.interface';
 import { Cron } from '@nestjs/schedule';
 import { BnetService } from '../bnet/bnet.service';
+import { GearService } from '../gear/gear.service';
 
 @Injectable()
 export class CharacterService {
@@ -13,6 +14,7 @@ export class CharacterService {
     @InjectRepository(Character)
     private readonly characterRepository: Repository<Character>,
     private readonly bnetService: BnetService,
+    private readonly gearService: GearService,
   ) {}
 
   async getCharacterByNameRealm(name: string, realm: string) {
@@ -31,7 +33,9 @@ export class CharacterService {
   }
 
   async getCharacterById(id: number) {
-    return await this.characterRepository.findOne(id);
+    return await this.characterRepository.findOne(id, {
+      relations: ['gear', 'activities', 'profiles'],
+    });
   }
 
   async edit(character: Character, payload: CharacterPayload) {
@@ -73,6 +77,31 @@ export class CharacterService {
     }
   }
 
+  async updateCharacterEquipment(character: Character) {
+    const equip = await this.bnetService.getCharacterEquipment(
+      character.name,
+      character.realm,
+    );
+    const equippedItems = equip.equipped_items;
+    for (const item of equippedItems) {
+      character = await this.gearService.create(
+        {
+          itemId: item.item.id,
+          ilvl: item.level.value,
+          name: item.name,
+          slot: item.slot.type,
+          socketCount: item.sockets?.length || 0,
+          bonusList: item.bonus_list,
+          quality: item.quality.type,
+          nameDescription: item.name_description?.display_string,
+        },
+        character,
+      );
+
+      character = await this.characterRepository.save(character);
+    }
+  }
+
   @Cron('* * * * *')
   async updateCharacters() {
     const characters = await this.characterRepository.find({
@@ -109,6 +138,8 @@ export class CharacterService {
         equippedItemLevel: bnetChar.equipped_item_level,
         imgUrl: media.assets?.find((asset) => asset.key === 'main')?.value,
       };
+
+      this.updateCharacterEquipment(character);
 
       this.edit(character, payload);
     });

@@ -9,6 +9,7 @@ const BASE_ENDPOINT = 'https://{region}.api.blizzard.com';
 const API_ENDPOINTS = {
   CHARACTER: '/profile/wow/character/{realm}/{name}',
   CHARACTER_MEDIA: '/profile/wow/character/{realm}/{name}/character-media',
+  CHARACTER_EQUIPMENT: '/profile/wow/character/{realm}/{name}/equipment',
 };
 
 const DEFAULT_PARAMS = {
@@ -55,6 +56,22 @@ export class BnetService {
       return (
         await this.fetch(
           this.replaceVars(API_ENDPOINTS.CHARACTER, {
+            name,
+            realm,
+          }),
+          region as 'eu' | 'us',
+        )
+      ).data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async getCharacterEquipment(name: string, realm: string, region = 'eu') {
+    try {
+      return (
+        await this.fetch(
+          this.replaceVars(API_ENDPOINTS.CHARACTER_EQUIPMENT, {
             name,
             realm,
           }),

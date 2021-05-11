@@ -1,5 +1,11 @@
 import { Exclude } from 'class-transformer';
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  ManyToMany,
+} from 'typeorm';
 import { PasswordTransformer } from './password.transformer';
 import { Roles } from '../app/roles.entity';
 import { Character } from '../character/character.entity';
@@ -38,10 +44,10 @@ export class Profile {
   /**
    * Column to represent a one to many relationship with the roles entity
    */
-  @OneToMany(type => Roles, role => role.profile)
+  @OneToMany((type) => Roles, (role) => role.profile)
   roles: Roles[];
 
-  @ManyToMany(type => Character, character => character.profiles)
+  @ManyToMany((type) => Character, (character) => character.profiles)
   characters: Character[];
 
   /**

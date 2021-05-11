@@ -86,12 +86,16 @@ export class CharacterController {
     const username = request.cookies?.username;
 
     const profile = await this.profileService.getByUsername(username);
-    const character = profile.characters.find(
-      (char) => char.id === parseInt(id, 10),
+    const character = await this.characterService.getCharacterById(
+      parseInt(id, 10),
     );
-    if (!character) {
+    if (
+      !character ||
+      !character.profiles.find((prof) => prof.id === profile.id)
+    ) {
       throw new BadRequestException('Couldnt find character');
     }
+    delete character.profiles;
     return character;
   }
 }

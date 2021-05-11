@@ -38,7 +38,7 @@ export class ProfileService {
     private readonly profileRepository: Repository<Profile>,
     @InjectRepository(Roles)
     private readonly rolesRepository: Repository<Roles>,
-  ) { }
+  ) {}
 
   /**
    * Fetches profile from database by UUID
@@ -55,7 +55,10 @@ export class ProfileService {
    * @returns {Promise<Profile>} data from queried profile
    */
   getByUsername(username: string): Promise<Profile> {
-    return this.profileRepository.findOne({ username }, { relations: ['characters'] });
+    return this.profileRepository.findOne(
+      { username },
+      { relations: ['characters'] },
+    );
   }
 
   /**
@@ -116,7 +119,7 @@ export class ProfileService {
     const { username } = payload;
     const profile = await this.getByUsername(username);
     if (profile) {
-      Object.keys(payload).forEach(key => {
+      Object.keys(payload).forEach((key) => {
         if (key === 'password') {
           key = crypto.createHmac('sha256', key).digest('hex');
         }

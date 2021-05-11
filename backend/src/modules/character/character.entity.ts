@@ -6,6 +6,9 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Activity } from '../activity/activity.entity';
+import { Gear } from '../gear/gear.entity';
+import { TGearSlot } from '../gear/gear.interface';
 import { Profile } from '../profile/profile.entity';
 import {
   ECharacterStatus,
@@ -80,4 +83,13 @@ export class Character {
   @ManyToMany((type) => Profile, (profile) => profile.characters)
   @JoinTable()
   profiles: Profile[];
+
+  @Column('simple-json', { nullable: true })
+  equippedGear?: { [index: string]: number };
+
+  @OneToMany((type) => Gear, (gear) => gear.owner)
+  gear: Gear[];
+
+  @OneToMany((type) => Activity, (activity) => activity.profile)
+  activities: Activity[];
 }
