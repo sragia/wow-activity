@@ -120,6 +120,11 @@ export class CharacterService {
 
       await this.updateStatus(character, ECharacterStatus.READY);
     } catch (e) {
+      console.log(
+        'Error on adding gear, returning to previous status',
+        character.id,
+        e,
+      );
       await this.updateStatus(character, oldStatus);
     }
   }
@@ -137,6 +142,7 @@ export class CharacterService {
           status: ECharacterStatus.NEW,
         },
       ],
+      take: 5,
       relations: ['gear'],
     });
     console.log(`[Character Update] Updating ${characters.length} characters`);
