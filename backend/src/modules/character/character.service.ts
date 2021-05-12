@@ -80,38 +80,48 @@ export class CharacterService {
     }
   }
 
+  async updateStatus(character: Character, status: ECharacterStatus) {
+    return await this.characterRepository.save({
+      ...character,
+      status,
+    });
+  }
+
   async updateCharacterEquipment(character: Character) {
     const equip = await this.bnetService.getCharacterEquipment(
       character.name,
       character.realm,
     );
-    character = await this.characterRepository.save({
-      ...character,
-      status: ECharacterStatus.IN_PROGRESS,
-    });
-    const equippedItems = equip.equipped_items;
-    for (const item of equippedItems) {
-      character = await this.gearService.create(
-        {
-          itemId: item.item.id,
-          ilvl: item.level.value,
-          name: item.name,
-          slot: item.slot.type,
-          socketCount: item.sockets?.length || 0,
-          bonusList: item.bonus_list,
-          quality: item.quality.type,
-          nameDescription: item.name_description?.display_string,
-        },
-        character,
-      );
+    const oldStatus = character.status;
+    character = await this.updateStatus(
+      character,
+      ECharacterStatus.IN_PROGRESS,
+    );
 
-      character = await this.characterRepository.save(character);
+    try {
+      const equippedItems = equip.equipped_items;
+      for (const item of equippedItems) {
+        character = await this.gearService.create(
+          {
+            itemId: item.item.id,
+            ilvl: item.level.value,
+            name: item.name,
+            slot: item.slot.type,
+            socketCount: item.sockets?.length || 0,
+            bonusList: item.bonus_list,
+            quality: item.quality.type,
+            nameDescription: item.name_description?.display_string,
+          },
+          character,
+        );
+
+        character = await this.characterRepository.save(character);
+      }
+
+      await this.updateStatus(character, ECharacterStatus.READY);
+    } catch (e) {
+      await this.updateStatus(character, oldStatus);
     }
-
-    await this.characterRepository.save({
-      ...character,
-      status: ECharacterStatus.READY,
-    });
   }
 
   @Cron('* * * * *')
