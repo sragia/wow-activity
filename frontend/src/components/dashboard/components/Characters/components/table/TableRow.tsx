@@ -42,7 +42,7 @@ export const CharacterTableRow = ({ char }: Props) => (
           styles[`statusDisplay--${char.status}`]
         )}
       >
-        {char.status}
+        {char.status.replace('_', ' ')}
       </span>
     </div>
     <div className={styles.viewCol}>
