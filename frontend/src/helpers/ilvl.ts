@@ -22,3 +22,16 @@ export const getIlvlColor = (ilvl: number) => {
 
   return prevCol.color
 }
+
+export const getColorByQuality = (quality: string) => {
+  switch (quality) {
+    case 'LEGENDARY':
+      return '#ff8000'
+    case 'EPIC':
+      return '#c600ff'
+    case 'RARE':
+      return '#0081ff'
+    default:
+      return '#ffffff'
+  }
+}

@@ -29,7 +29,9 @@ export class GearService {
       }
 
       if (
-        !payload.bonusList.every((bonusId) => g.bonusList.includes(bonusId))
+        !payload.bonusList.every((bonusId) =>
+          g.bonusList.includes(bonusId.toString()),
+        )
       ) {
         return false;
       }

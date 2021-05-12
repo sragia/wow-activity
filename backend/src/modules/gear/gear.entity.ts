@@ -31,7 +31,7 @@ export class Gear {
   socketCount: number;
 
   @Column('simple-array', { nullable: true })
-  bonusList?: number[];
+  bonusList?: string[];
 
   @Column()
   quality: TGearQuality;

@@ -12,6 +12,7 @@ import {
   ECovenant,
   ICharacter,
 } from '../../../../../../interfaces/character.interface'
+import { EquippedGear } from './EquippedGear'
 
 import styles from './styles.module.scss'
 
@@ -109,6 +110,11 @@ export const CharacterHeader = ({ character }: Props) => {
           </span>
         </div>
       </div>
+      {character && (
+        <div className={styles.colTwo}>
+          <EquippedGear character={character} color={color} />
+        </div>
+      )}
     </div>
   )
 }

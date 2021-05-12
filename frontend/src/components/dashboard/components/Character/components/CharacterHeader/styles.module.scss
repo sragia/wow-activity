@@ -1,5 +1,7 @@
 .header {
   display: flex;
+  padding: 0 20px;
+
   h3 {
     display: flex;
     margin: 0;
@@ -34,6 +36,10 @@
   > div {
     margin-top: 2px;
   }
+}
+
+.colTwo {
+  margin-left: auto;
 }
 
 .guild {
@@ -75,4 +81,51 @@
 .covenant {
   margin-left: 3px;
   padding: 0 3px;
+}
+
+.gearWrapper {
+  font-size: 12px;
+  display: flex;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2px;
+  font-weight: 500;
+  justify-content: space-between;
+}
+
+.gearLabel {
+  padding: 0 2px;
+  margin-right: 2px;
+  background-color: #f9ebe0;
+  color: #080708;
+}
+
+.gearName {
+  padding: 0 2px;
+}
+
+.gearItem {
+  display: flex;
+  align-items: center;
+}
+
+.gem {
+  display: block;
+  height: 18px;
+  width: 18px;
+  margin-right: 2px;
+  transition: all ease-in-out 0.2s;
+}
+
+.gearColumn {
+  margin-right: 5px;
+}
+
+.itemIlvl {
+  padding: 0 2px;
+  margin-left: 2px;
+  font-weight: 500;
 }

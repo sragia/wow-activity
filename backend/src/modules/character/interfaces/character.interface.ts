@@ -26,6 +26,7 @@ export enum ECovenant {
 export enum ECharacterStatus {
   NEW = 'new',
   READY = 'ready',
+  IN_PROGRESS = 'in_progress',
 }
 
 export interface CharacterPayload {

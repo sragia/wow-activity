@@ -3,7 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { LessThanOrEqual, Repository } from 'typeorm';
 import { Profile } from '../profile/profile.entity';
 import { Character } from './character.entity';
-import { CharacterPayload } from './interfaces/character.interface';
+import {
+  CharacterPayload,
+  ECharacterStatus,
+} from './interfaces/character.interface';
 import { Cron } from '@nestjs/schedule';
 import { BnetService } from '../bnet/bnet.service';
 import { GearService } from '../gear/gear.service';
@@ -82,6 +85,10 @@ export class CharacterService {
       character.name,
       character.realm,
     );
+    character = await this.characterRepository.save({
+      ...character,
+      status: ECharacterStatus.IN_PROGRESS,
+    });
     const equippedItems = equip.equipped_items;
     for (const item of equippedItems) {
       character = await this.gearService.create(
@@ -100,16 +107,27 @@ export class CharacterService {
 
       character = await this.characterRepository.save(character);
     }
+
+    await this.characterRepository.save({
+      ...character,
+      status: ECharacterStatus.READY,
+    });
   }
 
   @Cron('* * * * *')
   async updateCharacters() {
     const characters = await this.characterRepository.find({
-      where: {
-        lastUpdated: LessThanOrEqual(
-          new Date(new Date().getTime() - 4 * 60 * 60 * 1000),
-        ),
-      },
+      where: [
+        {
+          lastUpdated: LessThanOrEqual(
+            new Date(new Date().getTime() - 4 * 60 * 60 * 1000),
+          ),
+        },
+        {
+          status: ECharacterStatus.NEW,
+        },
+      ],
+      relations: ['gear'],
     });
     console.log(`[Character Update] Updating ${characters.length} characters`);
     characters.forEach(async (character) => {

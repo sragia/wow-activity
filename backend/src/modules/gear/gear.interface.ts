@@ -25,7 +25,7 @@ export interface IGearPayload {
   itemId: number;
   ilvl: number;
   socketCount: number;
-  bonusList: number[];
+  bonusList: string[];
   quality: TGearQuality;
   nameDescription: string;
 }
