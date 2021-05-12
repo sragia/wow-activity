@@ -109,10 +109,18 @@ export const CharacterHeader = ({ character }: Props) => {
             ).toLocaleString(DateTime.DATETIME_MED)}
           </span>
         </div>
+        <div>
+          <span>Last update</span>
+          <span className={styles.lastLogin}>
+            {DateTime.fromISO(character?.lastUpdated || '').toLocaleString(
+              DateTime.DATETIME_MED
+            )}
+          </span>
+        </div>
       </div>
       {character && (
         <div className={styles.colTwo}>
-          <EquippedGear character={character} color={color} />
+          <EquippedGear character={character} />
         </div>
       )}
     </div>

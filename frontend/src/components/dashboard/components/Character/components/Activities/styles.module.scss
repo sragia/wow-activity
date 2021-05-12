@@ -1,0 +1,68 @@
+.wrapper {
+  max-width: 30%;
+  max-height: 340px;
+}
+
+.title {
+  font-size: 18px;
+  background: #fe5e41;
+  padding: 0 5px;
+}
+
+.activities {
+  overflow-y: scroll;
+  max-height: 303px;
+  margin-top: 10px;
+  padding-right: 5px;
+
+  // Scroll
+}
+.activity {
+  border: 1px solid #1e1e1e;
+  margin-bottom: 10px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.activityLabel {
+  font-size: 11px;
+}
+
+.itemName {
+  font-size: 14px;
+}
+
+.itemInfo {
+  font-size: 10px;
+}
+
+.dateTime {
+  font-size: 9px;
+  margin-top: 5px;
+}
+
+.itemDetails {
+  > span {
+    margin-right: 2px;
+    padding: 0 2px;
+    font-weight: 500;
+  }
+  .itemSlot {
+    background-color: #f9ebe0;
+    color: #080708;
+  }
+  .itemSocket {
+    background-color: #fe5e41;
+    padding-right: 0;
+    color: #080708;
+    span {
+      background-color: #ffb30f;
+      padding: 0 2px;
+      font-weight: 600;
+    }
+  }
+}

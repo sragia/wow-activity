@@ -6,7 +6,6 @@ import styles from './styles.module.scss'
 
 interface Props {
   character: ICharacter
-  color: string
 }
 
 const GEAR_ORDER = [
@@ -37,11 +36,9 @@ const GEAR_ORDER = [
 const ItemDisplay = ({
   slot,
   character,
-  gemColor,
 }: {
   slot: string
   character: ICharacter
-  gemColor: string
 }) => {
   const item = character.gear?.find(
     (g) => g.id === character.equippedGear![slot]
@@ -54,12 +51,7 @@ const ItemDisplay = ({
     <div className={styles.gearItem}>
       {item.socketCount > 0 &&
         [...Array(item.socketCount)].map((i) => (
-          <span
-            style={{ backgroundColor: gemColor }}
-            className={styles.gem}
-            key={i}
-            title="Socket"
-          />
+          <span className={styles.gem} key={i} title="Socket" />
         ))}
       <span
         className={styles.gearName}
@@ -79,7 +71,7 @@ const ItemDisplay = ({
   )
 }
 
-export const EquippedGear = ({ character, color }: Props) => {
+export const EquippedGear = ({ character }: Props) => {
   const gear = character.equippedGear
   if (!gear) {
     return null
@@ -92,7 +84,7 @@ export const EquippedGear = ({ character, color }: Props) => {
           {col.map((slot) => (
             <div className={styles.item} key={slot}>
               <span className={styles.gearLabel}>{slot.replace('_', ' ')}</span>
-              <ItemDisplay slot={slot} character={character} gemColor={color} />
+              <ItemDisplay slot={slot} character={character} />
             </div>
           ))}
         </div>

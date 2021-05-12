@@ -120,7 +120,7 @@ export class CharacterService {
       where: [
         {
           lastUpdated: LessThanOrEqual(
-            new Date(new Date().getTime() - 4 * 60 * 60 * 1000),
+            new Date(new Date().getTime() - 60 * 60 * 1000),
           ),
         },
         {

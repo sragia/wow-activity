@@ -54,13 +54,28 @@ export interface IGear {
   id: number
   name: string
   slot: TGearSlot
-  createdAt: Date
+  createdAt: string
   itemId: number
   ilvl: number
   socketCount: number
   bonusList?: string[]
   quality: TGearQuality
   nameDescription?: string
+}
+
+export enum EActivityType {
+  GEAR_ACQUIRE = 'gear_acquire',
+}
+
+export interface IGearActivityData {
+  gearId: number
+}
+
+export interface IActivity {
+  id: number
+  activityType: EActivityType
+  activityData: IGearActivityData
+  createdAt: string
 }
 
 export interface ICharacter {
@@ -80,7 +95,9 @@ export interface ICharacter {
   avarageItemLevel: number
   equippedItemLevel: number
   status: ECharacterStatus
+  lastUpdated: string
   equippedGear?: { [index: string]: number }
   gear?: IGear[]
   imgUrl?: string
+  activities: IActivity[]
 }

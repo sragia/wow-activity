@@ -5,6 +5,7 @@ import { selectors } from '../../../../features/character'
 import { CharacterAction } from '../../../../features/character/actionTypes'
 import { StatusType } from '../../../../features/global-types'
 import { Loading } from '../../../loader/loader'
+import { Activites } from './components/Activities/Activities'
 import { CharacterHeader } from './components/CharacterHeader/CharacterHeader'
 
 import styles from './styles.module.scss'
@@ -34,6 +35,9 @@ export const Character = ({ params }: Props) => {
       )}
       <Loading show={status === StatusType.PENDING} duration={400} overlay />
       <CharacterHeader character={character} />
+      <div className={styles.body}>
+        <Activites character={character} />
+      </div>
     </div>
   )
 }

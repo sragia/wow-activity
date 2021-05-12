@@ -35,3 +35,17 @@ export const getColorByQuality = (quality: string) => {
       return '#ffffff'
   }
 }
+
+export const getColorByDescription = (description?: string) => {
+  switch (description) {
+    case 'Mythic':
+      return '#82204A'
+    case 'Heroic':
+      return '#558C8C'
+    default:
+      if (description?.includes('Mythic')) {
+        return '#849324'
+      }
+      return '#EFF7FF'
+  }
+}
