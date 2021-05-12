@@ -28,4 +28,5 @@ export interface IGearPayload {
   bonusList: string[];
   quality: TGearQuality;
   nameDescription: string;
+  iconUrl?: string;
 }

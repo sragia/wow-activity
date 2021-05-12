@@ -10,6 +10,7 @@ const API_ENDPOINTS = {
   CHARACTER: '/profile/wow/character/{realm}/{name}',
   CHARACTER_MEDIA: '/profile/wow/character/{realm}/{name}/character-media',
   CHARACTER_EQUIPMENT: '/profile/wow/character/{realm}/{name}/equipment',
+  ITEM_MEDIA: '/data/wow/media/item/{itemId}',
 };
 
 const DEFAULT_PARAMS = {
@@ -92,6 +93,28 @@ export class BnetService {
             realm,
           }),
           region as 'eu' | 'us',
+        )
+      ).data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async getItemMedia(itemId: number) {
+    try {
+      return (
+        await this.fetch(
+          this.replaceVars(API_ENDPOINTS.ITEM_MEDIA, {
+            itemId: itemId.toString(),
+          }),
+          'eu',
+          'GET',
+          {
+            params: {
+              locale: 'en_US',
+              namespace: 'static-eu',
+            },
+          },
         )
       ).data;
     } catch (e) {

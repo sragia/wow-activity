@@ -61,6 +61,7 @@ export interface IGear {
   bonusList?: string[]
   quality: TGearQuality
   nameDescription?: string
+  iconUrl?: string
 }
 
 export enum EActivityType {

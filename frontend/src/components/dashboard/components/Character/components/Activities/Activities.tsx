@@ -30,45 +30,57 @@ const ActivityDisplay = ({
       const item = character.gear?.find(
         (g) => g.id === activity.activityData.gearId
       )
-      console.log(item)
       return (
         <div className={styles.activity}>
           <span className={styles.activityLabel}>Gear acquired</span>
           <div className={styles.itemInfo}>
-            <span
-              className={styles.itemName}
-              style={{ color: getColorByQuality(item?.quality!) }}
-            >
-              {item?.name}
-            </span>
-            <div className={styles.itemDetails}>
-              <span
-                className={styles.itemLevel}
-                style={{ backgroundColor: getIlvlColor(item?.ilvl!) }}
-              >
-                {item?.ilvl}
-              </span>
-              {item?.nameDescription && (
-                <span
-                  className={styles.nameDescription}
-                  style={{
-                    backgroundColor: getColorByDescription(
-                      item?.nameDescription
-                    ),
-                  }}
-                >
-                  {item?.nameDescription}
-                </span>
+            <div className={styles.itemContent}>
+              {item?.iconUrl && (
+                <div className={styles.itemImg}>
+                  <img
+                    src={item.iconUrl}
+                    style={{ borderColor: getColorByQuality(item.quality) }}
+                    alt="icon-img"
+                  />
+                </div>
               )}
-              <span className={styles.itemSlot}>
-                {item?.slot.replace('_', ' ')}
-              </span>
-              {(item?.socketCount && (
-                <span className={styles.itemSocket}>
-                  Sockets <span>{item?.socketCount}</span>
+              <div>
+                <span
+                  className={styles.itemName}
+                  style={{ color: getColorByQuality(item?.quality!) }}
+                >
+                  {item?.name}
                 </span>
-              )) ||
-                null}
+                <div className={styles.itemDetails}>
+                  <span
+                    className={styles.itemLevel}
+                    style={{ backgroundColor: getIlvlColor(item?.ilvl!) }}
+                  >
+                    {item?.ilvl}
+                  </span>
+                  {item?.nameDescription && (
+                    <span
+                      className={styles.nameDescription}
+                      style={{
+                        backgroundColor: getColorByDescription(
+                          item?.nameDescription
+                        ),
+                      }}
+                    >
+                      {item?.nameDescription}
+                    </span>
+                  )}
+                  <span className={styles.itemSlot}>
+                    {item?.slot.replace('_', ' ')}
+                  </span>
+                  {(item?.socketCount && (
+                    <span className={styles.itemSocket}>
+                      Sockets <span>{item?.socketCount}</span>
+                    </span>
+                  )) ||
+                    null}
+                </div>
+              </div>
             </div>
             <div className={styles.dateTime}>
               <span>

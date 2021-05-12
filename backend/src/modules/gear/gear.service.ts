@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { EActivityType } from '../activity/activity.interface';
 import { ActivityService } from '../activity/activity.service';
+import { BnetService } from '../bnet/bnet.service';
 import { Character } from '../character/character.entity';
-import { Profile } from '../profile/profile.entity';
 import { Gear } from './gear.entity';
 import { IGearPayload } from './gear.interface';
 
@@ -14,6 +14,7 @@ export class GearService {
     @InjectRepository(Gear)
     private readonly gearRepository: Repository<Gear>,
     private readonly activityService: ActivityService,
+    private readonly bnetService: BnetService,
   ) {}
 
   getAlreadyStoredITem(
@@ -52,17 +53,29 @@ export class GearService {
     return item || null;
   }
 
+  async getItemMedia(gear: Gear) {
+    if (gear.iconUrl) return;
+
+    const media = await this.bnetService.getItemMedia(gear.itemId);
+
+    if (media.assets) {
+      gear.iconUrl = media.assets[0]?.value;
+      await this.gearRepository.save(gear);
+    }
+  }
+
   async create(
     payload: IGearPayload,
     character: Character,
   ): Promise<Character> {
     const storedItem = this.getAlreadyStoredITem(payload, character);
     if (storedItem) {
+      await this.getItemMedia(storedItem);
       return {
         ...character,
         equippedGear: {
           ...character.equippedGear,
-          [storedItem.slot]: storedItem.id,
+          [payload.slot]: storedItem.id,
         },
       };
     } else {
@@ -70,6 +83,7 @@ export class GearService {
       const gear = await this.gearRepository.save(
         this.gearRepository.create(payload),
       );
+      await this.getItemMedia(gear);
       this.activityService.create(
         {
           activityData: { gearId: gear.id },

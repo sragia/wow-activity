@@ -37,6 +37,9 @@ export class Gear {
   quality: TGearQuality;
 
   @Column({ nullable: true })
+  iconUrl?: string;
+
+  @Column({ nullable: true })
   nameDescription?: string;
 
   @ManyToOne((type) => Character, (profile) => profile.gear)

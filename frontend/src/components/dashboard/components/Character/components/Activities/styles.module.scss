@@ -40,6 +40,18 @@
   font-size: 10px;
 }
 
+.itemContent {
+  display: flex;
+}
+
+.itemImg {
+  margin-right: 5px;
+  img {
+    height: 32px;
+    border: 2px solid black;
+  }
+}
+
 .dateTime {
   font-size: 9px;
   margin-top: 5px;
