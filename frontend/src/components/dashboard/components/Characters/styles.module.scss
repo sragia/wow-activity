@@ -44,6 +44,12 @@
   }
 }
 
+.itemContainer {
+  max-height: 450px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
 .btnAccent {
   background-color: #fe5e41;
   padding: 0 10px;

@@ -68,14 +68,16 @@ export const Characters = () => {
       <Loading show={status === StatusType.PENDING} overlay duration={300} />
       <div className={styles.items}>
         <CharacterTableHeader />
-        {characters.map((char) => (
-          <CharacterTableRow key={char.id} char={char} />
-        ))}
-        {!characters.length && (
-          <div className={styles.noCharNotice}>
-            <span>No characters have been added</span>
-          </div>
-        )}
+        <div className={styles.itemContainer}>
+          {characters.map((char) => (
+            <CharacterTableRow key={char.id} char={char} />
+          ))}
+          {!characters.length && (
+            <div className={styles.noCharNotice}>
+              <span>No characters have been added</span>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )
