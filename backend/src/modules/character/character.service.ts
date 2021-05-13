@@ -151,7 +151,7 @@ export class CharacterService {
           status: ECharacterStatus.NEW,
         },
       ],
-      take: 5,
+      take: 100,
       relations: ['gear'],
     });
     console.log(`[Character Update] Updating ${characters.length} characters`);
