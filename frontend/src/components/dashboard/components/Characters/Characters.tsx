@@ -20,7 +20,7 @@ export const Characters = () => {
   const status = useSelector(selectors.getStatus)
 
   useEffect(() => {
-    if (!characters.length && status !== StatusType.PENDING) {
+    if (status !== StatusType.PENDING) {
       dispatch({ type: CharacterAction.GetCharacters })
     }
   }, [])
