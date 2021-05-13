@@ -7,6 +7,7 @@ import { UserReducer } from './features/user'
 import { CharacterReducer } from './features/character'
 import { rootEpics } from './features/epics'
 import { UserActions } from './features/user/actionTypes'
+import { ActivitiesReducer } from './features/activities'
 
 /* eslint-disable import/no-extraneous-dependencies */
 export const history = createBrowserHistory()
@@ -16,6 +17,7 @@ const rootReducer = (his: any) =>
     count: CounterReducer,
     user: UserReducer,
     character: CharacterReducer,
+    activities: ActivitiesReducer,
     router: connectRouter(his),
   })
 

@@ -72,6 +72,7 @@ export class GearService {
   async create(
     payload: IGearPayload,
     character: Character,
+    isNew?: boolean,
   ): Promise<Character> {
     const storedItem = this.getAlreadyStoredITem(payload, character);
     if (storedItem) {
@@ -89,13 +90,15 @@ export class GearService {
         this.gearRepository.create(payload),
       );
       await this.getItemMedia(gear);
-      this.activityService.create(
-        {
-          activityData: { gearId: gear.id },
-          activityType: EActivityType.GEAR_ACQUIRE,
-        },
-        character,
-      );
+      if (!isNew) {
+        this.activityService.create(
+          {
+            activityData: { gearId: gear.id },
+            activityType: EActivityType.GEAR_ACQUIRE,
+          },
+          character,
+        );
+      }
 
       try {
         if (character.equippedGear) {
@@ -114,5 +117,9 @@ export class GearService {
         console.error(e);
       }
     }
+  }
+
+  async getById(id: number) {
+    return this.gearRepository.findOne(id);
   }
 }

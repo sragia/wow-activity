@@ -18,12 +18,12 @@ interface SetStatusAction {
 }
 
 interface AddCharacterAction {
-  type: typeof CharacterAction.SetStatus
+  type: typeof CharacterAction.AddCharacter
   payload: { name: string; realm: string }
 }
 
 interface AddCharacterSuccessAction {
-  type: typeof CharacterAction.SetStatus
+  type: typeof CharacterAction.AddCharacterSuccess
   payload: null
 }
 

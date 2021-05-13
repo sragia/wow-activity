@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { Character } from '../character/character.entity';
 import { Profile } from '../profile/profile.entity';
 import { Activity } from './activity.entity';
@@ -20,5 +20,14 @@ export class ActivityService {
         profile,
       }),
     );
+  }
+
+  async getActivitiesForCharacters(characters: Character[]) {
+    return this.activityRepository.find({
+      where: {
+        profile: In(characters),
+      },
+      relations: ['characters'],
+    });
   }
 }

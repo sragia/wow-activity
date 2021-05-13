@@ -6,6 +6,7 @@ import { logoutUser } from './user/epics/logout.epic'
 import { getCharactersAction } from './character/epics/getCharacters.epic'
 import { addCharacterAction } from './character/epics/addCharacter.epic'
 import { getCharacterAction } from './character/epics/getCharacter.epic'
+import { getActivitiesAction } from './activities/epics/getActivities.epic'
 
 export const rootEpics = combineEpics(
   loginAction,
@@ -14,5 +15,6 @@ export const rootEpics = combineEpics(
   logoutUser,
   getCharactersAction,
   getCharacterAction,
-  addCharacterAction
+  addCharacterAction,
+  getActivitiesAction
 )

@@ -14,6 +14,7 @@ import { roles } from './app.roles';
 import { BnetModule } from '../bnet/bnet.module';
 import { CharacterModule } from '../character/character.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { DataModule } from '../data/data.module';
 
 @Module({
   imports: [
@@ -79,6 +80,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     ProfileModule,
     BnetModule,
     CharacterModule,
+    DataModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -10,6 +10,8 @@ import { Logo } from './components/logo/Logo'
 import { history } from './store'
 import { UserActions } from './features/user/actionTypes'
 
+import './variables.global.scss'
+
 const App: React.FC = () => {
   const dispatch = useDispatch()
   useEffect(() => {

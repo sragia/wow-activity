@@ -10,6 +10,7 @@ import {
 import { Cron } from '@nestjs/schedule';
 import { BnetService } from '../bnet/bnet.service';
 import { GearService } from '../gear/gear.service';
+import { Activity } from '../activity/activity.entity';
 
 @Injectable()
 export class CharacterService {
@@ -80,6 +81,13 @@ export class CharacterService {
     }
   }
 
+  async getCharacterActivities(characterId: number): Promise<Activity[]> {
+    const character = await this.characterRepository.findOne(characterId, {
+      relations: ['activities'],
+    });
+    return character?.activities;
+  }
+
   async updateStatus(character: Character, status: ECharacterStatus) {
     return await this.characterRepository.save({
       ...character,
@@ -113,6 +121,7 @@ export class CharacterService {
             nameDescription: item.name_description?.display_string,
           },
           character,
+          oldStatus === ECharacterStatus.NEW,
         );
 
         character = await this.characterRepository.save(character);

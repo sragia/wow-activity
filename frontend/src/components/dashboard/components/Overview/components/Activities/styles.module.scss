@@ -1,0 +1,63 @@
+.wrapper {
+  max-width: 33%;
+  position: relative;
+}
+
+.activitiesContainer {
+  min-height: 470px;
+  max-height: 470px;
+  overflow-y: scroll;
+  padding-right: 10px;
+}
+
+.item {
+  padding: 5px;
+  border: 1px solid var(--color--border-light);
+  margin-bottom: 3px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.itemHeader {
+  font-size: 12px;
+}
+
+.gearAcquire {
+  font-size: 14px;
+}
+
+.gearIlvl {
+  padding: 0 2px;
+  margin-left: 2px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.itemCharacterRealm {
+  padding-right: 5px;
+}
+
+.itemCharacterName {
+  padding: 0 2px;
+  font-weight: 600;
+  margin-right: 2px;
+}
+
+.itemLabel {
+  padding-left: 5px;
+  border-left: 1px solid var(--color--accent);
+}
+
+.itemFooter {
+  font-size: 10px;
+}
+
+.title {
+  font-size: 14px;
+  background-color: var(--color--accent);
+  padding: 0 5px;
+  margin-bottom: 10px;
+  width: auto;
+  display: block;
+}

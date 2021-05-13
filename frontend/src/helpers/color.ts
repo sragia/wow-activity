@@ -197,7 +197,7 @@ export const getClassColor = (className?: string) => {
 export const getClassOppositeColor = (className?: string) => {
   switch (className?.replace(' ', '').toLowerCase()) {
     case 'paladin':
-      return '#F9EBE0'
+      return '#080708'
     case 'deathknight':
       return '#F9EBE0'
     case 'demonhunter':

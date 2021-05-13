@@ -1,3 +1,7 @@
+import { Character } from '../character/character.entity';
+import { Gear } from '../gear/gear.entity';
+import { Activity } from './activity.entity';
+
 export enum EActivityType {
   GEAR_ACQUIRE = 'gear_acquire',
 }
