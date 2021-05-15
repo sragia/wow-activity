@@ -77,6 +77,26 @@ export class CharacterController {
     return profile.characters;
   }
 
+  @Post(':id/delete')
+  @UseGuards(AuthGuard('jwt'))
+  async deleteCharacterForUser(
+    @Param('id') id: string,
+    @Req() request: Request,
+  ): Promise<Character[]> {
+    const username = request.cookies?.username;
+
+    let profile = await this.profileService.getByUsername(username);
+    profile = {
+      ...profile,
+      characters: profile.characters.filter(
+        (char) => char.id !== parseInt(id, 10),
+      ),
+    };
+    await this.profileService.save(profile);
+
+    return profile.characters;
+  }
+
   @Get(':id')
   @UseGuards(AuthGuard('jwt'))
   async getCharacter(

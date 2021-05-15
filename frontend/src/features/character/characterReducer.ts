@@ -16,6 +16,12 @@ export default (state = initialState, action: CharHandler) => {
       return { ...state, status: action.payload }
     case CharacterAction.GetCharacterSuccess:
       return { ...state, character: action.payload }
+    case CharacterAction.RemoveCharacterSuccess:
+      return {
+        ...state,
+        characters: action.payload,
+        status: StatusType.SUCCESS,
+      }
     default:
       return state
   }

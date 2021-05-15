@@ -57,6 +57,10 @@ class Api {
     return this.fetch('character/add', payload, 'POST')
   }
 
+  removeCharacter(id: number) {
+    return this.fetch(`character/${id}/delete`, undefined, 'POST')
+  }
+
   fetch(
     uri: string,
     payload?: { [index: string]: any },

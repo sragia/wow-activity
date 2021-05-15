@@ -18,6 +18,10 @@ export const characterMessages = {
     characters,
   [CharacterAction.GetCharacterError]: (err: string) => err,
   [CharacterAction.SetStatus]: (status: StatusType) => status,
+  [CharacterAction.RemoveCharacter]: (id: number) => id,
+  [CharacterAction.RemoveCharacterError]: (err: string) => err,
+  [CharacterAction.RemoveCharacterSuccess]: (characters: ICharacter[]) =>
+    characters,
 }
 
 export const CharMsg = msgCreator(characterMessages)

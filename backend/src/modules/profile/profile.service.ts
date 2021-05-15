@@ -110,6 +110,10 @@ export class ProfileService {
     );
   }
 
+  async save(profile: Profile): Promise<Profile> {
+    return this.profileRepository.save(profile);
+  }
+
   /**
    * Edit profile data
    * @param {PatchProfilePayload} payload

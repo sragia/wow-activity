@@ -11,5 +11,9 @@ export const CharacterAction = {
   AddCharacterSuccess: 'CharacterActions/AddCharacterSuccess',
   AddCharacterError: 'CharacterActions/AddCharacterError',
 
+  RemoveCharacter: 'CharacterActions/RemoveCharacter',
+  RemoveCharacterSuccess: 'CharacterActions/RemoveCharacterSuccess',
+  RemoveCharacterError: 'CharacterActions/RemoveCharacterError',
+
   SetStatus: 'CharacterActions/SetStatus',
 }

@@ -8,6 +8,7 @@ import { addCharacterAction } from './character/epics/addCharacter.epic'
 import { getCharacterAction } from './character/epics/getCharacter.epic'
 import { getActivitiesAction } from './activities/epics/getActivities.epic'
 import { setAlertDurationEpic } from './alerts/epics/setAlertDuration.epic'
+import { removeCharacterAction } from './character/epics/removeCharacter.epic'
 
 export const rootEpics = combineEpics(
   loginAction,
@@ -18,5 +19,6 @@ export const rootEpics = combineEpics(
   getCharacterAction,
   addCharacterAction,
   getActivitiesAction,
-  setAlertDurationEpic
+  setAlertDurationEpic,
+  removeCharacterAction
 )

@@ -11,26 +11,23 @@ import { StatusType } from '../../global-types'
 import { CharacterAction } from '../actionTypes'
 import { CharMsg } from '../types'
 
-export function addCharacterAction(action$: any) {
+export function removeCharacterAction(action$: any) {
   return action$.pipe(
-    ofType(CharacterAction.AddCharacter),
+    ofType(CharacterAction.RemoveCharacter),
     mergeMap(({ payload }) => {
-      const res = api.addCharacter({
-        ...payload,
-        realm: payload.realm.replace(' ', '-'),
-      })
+      const res = api.removeCharacter(payload)
       return concat(
         of({ type: CharacterAction.SetStatus, payload: StatusType.PENDING }),
         res.pipe(
-          mergeMap(() => {
+          mergeMap((result) => {
             return of(
               AlertMsg(AlertActions.SetAlert, {
-                text: `Successfully added ${payload.name}-${payload.realm}`,
+                text: `Successfully removed character`,
                 type: AlertType.SUCCESS,
-                duration: 5000,
+                duration: 3000,
                 id: getAlertId(),
               }),
-              CharMsg(CharacterAction.GetCharacters)
+              CharMsg(CharacterAction.RemoveCharacterSuccess, result.response)
             )
           }),
           catchableAlert(() =>
