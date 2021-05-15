@@ -5,6 +5,7 @@ import {
   getColorByQuality,
   getIlvlColor,
 } from '../../../../../../helpers/ilvl'
+import { prepareWowheadItem } from '../../../../../../helpers/items'
 import {
   EActivityType,
   IActivity,
@@ -34,7 +35,11 @@ const ActivityDisplay = ({
         <div className={styles.activity}>
           <span className={styles.activityLabel}>Gear acquired</span>
           <div className={styles.itemInfo}>
-            <div className={styles.itemContent}>
+            <a
+              href="#item"
+              className={styles.itemContent}
+              data-wowhead={prepareWowheadItem(item!)}
+            >
               {item?.iconUrl && (
                 <div className={styles.itemImg}>
                   <img
@@ -81,7 +86,7 @@ const ActivityDisplay = ({
                     null}
                 </div>
               </div>
-            </div>
+            </a>
             <div className={styles.dateTime}>
               <span>
                 {DateTime.fromISO(

@@ -4,6 +4,7 @@ import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 import { ConnectedRouter } from 'connected-react-router'
 
 import { useDispatch } from 'react-redux'
+import { Helmet } from 'react-helmet'
 import { DashboardPage } from './pages/Dashboard'
 import { Home } from './pages/Home'
 import { Logo } from './components/logo/Logo'
@@ -20,6 +21,15 @@ const App: React.FC = () => {
   }, [])
   return (
     <BrowserRouter>
+      <Helmet>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              'const whTooltips = {colorLinks: true, iconizeLinks: true, renameLinks: true};',
+          }}
+        />
+        <script src="https://wow.zamimg.com/widgets/power.js" />
+      </Helmet>
       <Logo />
       <Alert />
       <div className="container">

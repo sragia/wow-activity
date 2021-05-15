@@ -46,6 +46,6 @@ export const getColorByDescription = (description?: string) => {
       if (description?.includes('Mythic')) {
         return '#849324'
       }
-      return '#EFF7FF'
+      return '#1e1e1e'
   }
 }

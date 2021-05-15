@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import {
   getClassColor,
   getClassOppositeColor,
@@ -7,6 +8,7 @@ import {
 import { getColorByQuality, getIlvlColor } from '../../../../../../helpers/ilvl'
 import { IActivityResult } from '../../../../../../interfaces/activities.interface'
 import { EActivityType } from '../../../../../../interfaces/character.interface'
+import { prepareWowheadItem } from '../../../../../../helpers/items'
 
 import styles from './styles.module.scss'
 
@@ -23,12 +25,14 @@ const ContentDisplay = ({ activity }: { activity: IActivityResult }) => {
     case EActivityType.GEAR_ACQUIRE:
       return (
         <div className={styles.gearAcquire}>
-          <span
+          <a
+            href="#item"
             className={styles.gearName}
             style={{ color: getColorByQuality(activity.gear!.quality) }}
+            data-wowhead={prepareWowheadItem(activity.gear!)}
           >
             {activity.gear!.name}
-          </span>
+          </a>
           <span
             className={styles.gearIlvl}
             style={{ backgroundColor: getIlvlColor(activity.gear!.ilvl) }}
@@ -46,18 +50,20 @@ export const ActivityDisplay = ({ activity }: Props) => {
   return (
     <div className={styles.item}>
       <div className={styles.itemHeader}>
-        <span
-          className={styles.itemCharacterName}
-          style={{
-            backgroundColor: getClassColor(activity.character.class),
-            color: getClassOppositeColor(activity.character.class),
-          }}
-        >
-          {activity.character.name}
-        </span>
-        <span className={styles.itemCharacterRealm}>
-          {activity.character.realm}
-        </span>
+        <Link to={`/dashboard/character/${activity.character.id}`}>
+          <span
+            className={styles.itemCharacterName}
+            style={{
+              backgroundColor: getClassColor(activity.character.class),
+              color: getClassOppositeColor(activity.character.class),
+            }}
+          >
+            {activity.character.name}
+          </span>
+          <span className={styles.itemCharacterRealm}>
+            {activity.character.realm}
+          </span>
+        </Link>
         <span className={styles.itemLabel}>
           {LABELS[activity.activity.activityType]}
         </span>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { getColorByQuality } from '../../../../../../helpers/ilvl'
+import { prepareWowheadItem } from '../../../../../../helpers/items'
 import { ICharacter } from '../../../../../../interfaces/character.interface'
 
 import styles from './styles.module.scss'
@@ -48,7 +49,11 @@ const ItemDisplay = ({
   }
 
   return (
-    <div className={styles.gearItem}>
+    <a
+      href="#item"
+      data-wowhead={prepareWowheadItem(item)}
+      className={styles.gearItem}
+    >
       {item.socketCount > 0 &&
         [...Array(item.socketCount)].map((i) => (
           <span className={styles.gem} key={i} title="Socket" />
@@ -67,7 +72,7 @@ const ItemDisplay = ({
       >
         {item.ilvl}
       </span>
-    </div>
+    </a>
   )
 }
 

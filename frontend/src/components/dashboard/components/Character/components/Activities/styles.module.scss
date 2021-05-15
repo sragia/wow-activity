@@ -42,6 +42,7 @@
 
 .itemContent {
   display: flex;
+  text-decoration: none;
 }
 
 .itemImg {
@@ -62,6 +63,7 @@
     margin-right: 2px;
     padding: 0 2px;
     font-weight: 500;
+    color: var(--color--textWhite);
   }
   .itemSlot {
     background-color: #f9ebe0;

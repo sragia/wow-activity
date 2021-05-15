@@ -21,10 +21,18 @@
 
 .itemHeader {
   font-size: 12px;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 }
 
 .gearAcquire {
   font-size: 14px;
+  a {
+    text-decoration: none;
+  }
 }
 
 .gearIlvl {
