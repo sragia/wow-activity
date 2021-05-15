@@ -1,14 +1,20 @@
+import msgCreator, { ActionHandler, ActionTypeMap } from 'action-typed'
 import { IActivityResult } from '../../interfaces/activities.interface'
-import { ICharacter } from '../../interfaces/character.interface'
+import { characterMessages } from '../character/types'
 import { StatusType } from '../global-types'
 import { ActivitiesActions } from './actionTypes'
 
-interface GetActivitiesSuccessAction {
-  type: typeof ActivitiesActions.GetActivitiesSuccess
-  payload: IActivityResult[]
+export const activitiesMessages = {
+  [ActivitiesActions.GetActivities]: () => undefined,
+  [ActivitiesActions.GetActivitiesSuccess]: (activities: IActivityResult[]) =>
+    activities,
+  [ActivitiesActions.SetStatus]: (status: StatusType) => status,
+  [ActivitiesActions.GetActivitiesError]: (err: string) => err,
 }
 
-export type ActivitiesActionType = GetActivitiesSuccessAction
+export const ActivitiesMsg = msgCreator(activitiesMessages)
+export type ActivitiesHandler = ActionHandler<typeof activitiesMessages>
+export type ActivitiesTypeMap = ActionTypeMap<typeof characterMessages>
 
 export interface SystemState {
   activities: {

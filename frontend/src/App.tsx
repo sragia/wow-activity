@@ -11,6 +11,7 @@ import { history } from './store'
 import { UserActions } from './features/user/actionTypes'
 
 import './variables.global.scss'
+import { Alert } from './components/alert/Alert'
 
 const App: React.FC = () => {
   const dispatch = useDispatch()
@@ -20,6 +21,7 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Logo />
+      <Alert />
       <div className="container">
         <ConnectedRouter history={history}>
           <Switch>

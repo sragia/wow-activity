@@ -1,62 +1,25 @@
+import msgCreator, { ActionHandler, ActionTypeMap } from 'action-typed'
 import { UserActions } from './actionTypes'
-import {
-  LoginErrorResponse,
-  LoginRequest,
-  LoginResponse,
-  RegisterErrorResponse,
-  RegisterRequest,
-  User,
-} from './entities'
+import { LoginRequest, RegisterRequest, User } from './entities'
 
-interface LoginSuccessAction {
-  type: typeof UserActions.LoginSuccess
-  payload: LoginResponse
+export const userMessages = {
+  [UserActions.GetUser]: () => undefined,
+  [UserActions.Init]: () => undefined,
+  [UserActions.InitError]: (err: string) => err,
+  [UserActions.Login]: (payload: LoginRequest) => payload,
+  [UserActions.LoginError]: (err: string) => err,
+  [UserActions.LoginSuccess]: (username: string) => username,
+  [UserActions.Logout]: () => undefined,
+  [UserActions.LogoutSuccess]: () => undefined,
+  [UserActions.Register]: (payload: RegisterRequest) => payload,
+  [UserActions.RegisterError]: (err: string) => err,
+  [UserActions.RegisterSuccess]: () => undefined,
+  [UserActions.SetUser]: (user: User) => user,
 }
 
-interface LoginAction {
-  type: typeof UserActions.Login
-  payload: LoginRequest
-}
-
-interface LoginErrorAction {
-  type: typeof UserActions.LoginError
-  payload: LoginErrorResponse
-}
-
-interface RegisterAction {
-  type: typeof UserActions.Register
-  payload: RegisterRequest
-}
-
-interface RegisterSuccessAction {
-  type: typeof UserActions.RegisterSuccess
-  payload: LoginResponse
-}
-
-interface RegisterErrorAction {
-  type: typeof UserActions.RegisterError
-  payload: RegisterErrorResponse
-}
-
-interface GetUserAction {
-  type: typeof UserActions.GetUser
-  payload: null
-}
-
-interface SetUserAction {
-  type: typeof UserActions.SetUser
-  payload: User
-}
-
-export type UserActionTypes =
-  | LoginSuccessAction
-  | LoginAction
-  | LoginErrorAction
-  | RegisterAction
-  | RegisterErrorAction
-  | RegisterSuccessAction
-  | GetUserAction
-  | SetUserAction
+export const UserMsg = msgCreator(userMessages)
+export type UserHandler = ActionHandler<typeof userMessages>
+export type UserTypeMap = ActionTypeMap<typeof userMessages>
 
 export interface SystemState {
   user: {

@@ -8,6 +8,7 @@ import { CharacterReducer } from './features/character'
 import { rootEpics } from './features/epics'
 import { UserActions } from './features/user/actionTypes'
 import { ActivitiesReducer } from './features/activities'
+import { AlertReducer } from './features/alerts'
 
 /* eslint-disable import/no-extraneous-dependencies */
 export const history = createBrowserHistory()
@@ -18,6 +19,7 @@ const rootReducer = (his: any) =>
     user: UserReducer,
     character: CharacterReducer,
     activities: ActivitiesReducer,
+    alerts: AlertReducer,
     router: connectRouter(his),
   })
 

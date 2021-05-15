@@ -1,50 +1,28 @@
+import msgCreator, { ActionHandler, ActionTypeMap } from 'action-typed'
 import { ICharacter } from '../../interfaces/character.interface'
 import { StatusType } from '../global-types'
 import { CharacterAction } from './actionTypes'
 
-interface GetCharactersSuccessAction {
-  type: typeof CharacterAction.GetCharactersSuccess
-  payload: ICharacter[]
+export const characterMessages = {
+  [CharacterAction.AddCharacter]: (name: string, realm: string) => ({
+    name,
+    realm,
+  }),
+  [CharacterAction.AddCharacterSuccess]: () => undefined,
+  [CharacterAction.AddCharacterError]: (err: string) => err,
+  [CharacterAction.GetCharacter]: (id: number) => id,
+  [CharacterAction.GetCharacterError]: (err: string) => err,
+  [CharacterAction.GetCharacterSuccess]: (character: ICharacter) => character,
+  [CharacterAction.GetCharacters]: () => undefined,
+  [CharacterAction.GetCharactersSuccess]: (characters: ICharacter[]) =>
+    characters,
+  [CharacterAction.GetCharacterError]: (err: string) => err,
+  [CharacterAction.SetStatus]: (status: StatusType) => status,
 }
 
-interface GetCharactersAction {
-  type: typeof CharacterAction.GetCharacters
-  payload: null
-}
-
-interface SetStatusAction {
-  type: typeof CharacterAction.SetStatus
-  payload: StatusType
-}
-
-interface AddCharacterAction {
-  type: typeof CharacterAction.AddCharacter
-  payload: { name: string; realm: string }
-}
-
-interface AddCharacterSuccessAction {
-  type: typeof CharacterAction.AddCharacterSuccess
-  payload: null
-}
-
-interface GetCharacterAction {
-  type: typeof CharacterAction.GetCharacter
-  payload: number
-}
-
-interface GetCharacterSuccessAction {
-  type: typeof CharacterAction.GetCharacterSuccess
-  payload: ICharacter
-}
-
-export type CharacterActionTypes =
-  | GetCharactersSuccessAction
-  | GetCharactersAction
-  | SetStatusAction
-  | AddCharacterAction
-  | AddCharacterSuccessAction
-  | GetCharacterAction
-  | GetCharacterSuccessAction
+export const CharMsg = msgCreator(characterMessages)
+export type CharHandler = ActionHandler<typeof characterMessages>
+export type CharTypeMap = ActionTypeMap<typeof characterMessages>
 
 export interface SystemState {
   character: {

@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import LazyLoad from 'react-lazyload'
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 import { UserActions } from '../../features/user/actionTypes'
 
 import styles from './styles.module.scss'
 
 export const Login = () => {
   const dispatch = useDispatch()
-  const { push } = useHistory()
   const [form, setForm] = useState({
     username: '',
     password: '',
@@ -27,9 +25,11 @@ export const Login = () => {
     evt.preventDefault()
     dispatch({
       type: UserActions.Login,
-      payload: { username: form.username, password: form.password },
+      payload: {
+        username: form.username.trim(),
+        password: form.password.trim(),
+      },
     })
-    push('/dashboard') // TODO: Move this to LoginSuccess
   }
 
   return (

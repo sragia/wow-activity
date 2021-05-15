@@ -1,6 +1,6 @@
 import { StatusType } from '../global-types'
 import { CharacterAction } from './actionTypes'
-import { CharacterActionTypes } from './types'
+import { CharHandler } from './types'
 
 const initialState = {
   characters: [],
@@ -8,7 +8,7 @@ const initialState = {
   character: null,
 }
 
-export default (state = initialState, action: CharacterActionTypes) => {
+export default (state = initialState, action: CharHandler) => {
   switch (action.type) {
     case CharacterAction.GetCharactersSuccess:
       return { ...state, characters: action.payload }

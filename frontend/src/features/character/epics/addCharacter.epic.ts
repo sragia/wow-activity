@@ -1,16 +1,19 @@
+import { ofType } from 'redux-observable'
 import { concat, of } from 'rxjs'
-import { mergeMap, filter, map } from 'rxjs/operators'
+import { mergeMap, map } from 'rxjs/operators'
 import api from '../../../api/api'
+import { catchableAlert, catchableSignOut } from '../../ajax'
+import { getAlertId } from '../../alerts'
+import { AlertActions } from '../../alerts/actionTypes'
+import { AlertType } from '../../alerts/alert.interface'
+import { AlertMsg } from '../../alerts/types'
 import { StatusType } from '../../global-types'
 import { CharacterAction } from '../actionTypes'
-import { CharacterActionTypes } from '../types'
+import { CharMsg } from '../types'
 
 export function addCharacterAction(action$: any) {
   return action$.pipe(
-    filter(
-      (action: CharacterActionTypes) =>
-        action.type === CharacterAction.AddCharacter
-    ),
+    ofType(CharacterAction.AddCharacter),
     mergeMap(({ payload }) => {
       const res = api.addCharacter({
         ...payload,
@@ -20,10 +23,21 @@ export function addCharacterAction(action$: any) {
         of({ type: CharacterAction.SetStatus, payload: StatusType.PENDING }),
         res.pipe(
           map(() => {
-            return {
-              type: CharacterAction.GetCharacters,
-            }
-          })
+            return of(
+              AlertMsg(AlertActions.SetAlert, {
+                text: `Successfully added ${payload.name}-${payload.realm}`,
+                type: AlertType.SUCCESS,
+                id: getAlertId(),
+              }),
+              CharMsg(CharacterAction.GetCharacters)
+            )
+          }),
+          catchableAlert(() =>
+            CharMsg(CharacterAction.SetStatus, StatusType.ERROR)
+          ),
+          catchableSignOut((err) =>
+            CharMsg(CharacterAction.AddCharacterError, err)
+          )
         )
       )
     })

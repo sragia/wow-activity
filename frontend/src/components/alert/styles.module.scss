@@ -1,0 +1,56 @@
+.alertItem {
+  max-height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color--accent);
+  margin-bottom: 2px;
+  span {
+    &::first-letter {
+      text-transform: capitalize;
+    }
+    padding: 5px 15px;
+    background-color: var(--color--accent);
+    font-size: 13px;
+    color: var(--color--textWhite);
+  }
+
+  button {
+    height: 30px;
+    width: 30px;
+    margin-left: 2px;
+    background-color: var(--color--border-light);
+    color: var(--color--textWhite);
+    border: 0;
+    outline: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    svg {
+      height: 18px;
+      width: 18px;
+      line-height: 30px;
+      position: relative;
+      bottom: 1px;
+    }
+  }
+
+  &.error {
+    span {
+      background-color: var(--color--error);
+    }
+  }
+
+  &.success {
+    span {
+      background-color: var(--color--success);
+    }
+  }
+
+  &.warning {
+    span {
+      background-color: var(--color--warning);
+    }
+  }
+}
