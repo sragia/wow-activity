@@ -4,6 +4,10 @@
   font-weight: 300;
   margin-bottom: 5px;
   display: flex;
+  transition: all 0.15s ease-in-out;
+  &:hover {
+    background-color: var(--color--border-light);
+  }
 }
 
 .name {
