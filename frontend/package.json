@@ -50,6 +50,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "prebuild": "git pull",
     "build": "react-scripts build",
     "postbuild": "cp -r build/* build-prod/.",
     "test": "react-scripts test",
