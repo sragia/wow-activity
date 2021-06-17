@@ -160,31 +160,33 @@ export class CharacterService {
         character.name,
         character.realm,
       );
-      const media = await this.bnetService.getCharacterMedia(
-        character.name,
-        character.realm,
-      );
-      const payload = {
-        name: bnetChar.name,
-        realm: bnetChar.realm.name,
-        faction: bnetChar.faction.type,
-        covenant: bnetChar.covenant_progress?.chosen_covenant?.id,
-        guild: bnetChar.guild.name,
-        level: bnetChar.level,
-        class: bnetChar.character_class.name,
-        spec: bnetChar.active_spec.name,
-        race: bnetChar.race.name,
-        achievementPoints: bnetChar.achievement_points,
-        experience: bnetChar.experience,
-        lastLogin: bnetChar.last_login_timestamp,
-        avarageItemLevel: bnetChar.average_item_level,
-        equippedItemLevel: bnetChar.equipped_item_level,
-        imgUrl: media.assets?.find((asset) => asset.key === 'main')?.value,
-      };
+      if (bnetChar) {
+        const media = await this.bnetService.getCharacterMedia(
+          character.name,
+          character.realm,
+        );
+        const payload = {
+          name: bnetChar.name,
+          realm: bnetChar.realm.name,
+          faction: bnetChar.faction.type,
+          covenant: bnetChar.covenant_progress?.chosen_covenant?.id,
+          guild: bnetChar.guild.name,
+          level: bnetChar.level,
+          class: bnetChar.character_class.name,
+          spec: bnetChar.active_spec.name,
+          race: bnetChar.race.name,
+          achievementPoints: bnetChar.achievement_points,
+          experience: bnetChar.experience,
+          lastLogin: bnetChar.last_login_timestamp,
+          avarageItemLevel: bnetChar.average_item_level,
+          equippedItemLevel: bnetChar.equipped_item_level,
+          imgUrl: media.assets?.find((asset) => asset.key === 'main')?.value,
+        };
 
-      this.updateCharacterEquipment(character);
+        this.updateCharacterEquipment(character);
 
-      this.edit(character, payload);
+        this.edit(character, payload);
+      }
     });
   }
 }
