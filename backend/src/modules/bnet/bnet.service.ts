@@ -124,7 +124,7 @@ export class BnetService {
 
   async fetch(uri: string, region: 'eu' | 'us', method = 'GET', options?: any) {
     const token = await this.getToken();
-    const ret =  axios({
+    const ret =  await axios({
       url: `${this.replaceVars(BASE_ENDPOINT, { region })}${uri}`,
       method,
       params: DEFAULT_PARAMS,
