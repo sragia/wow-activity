@@ -156,6 +156,7 @@ export class CharacterService {
     });
     console.log(`[Character Update] Updating ${characters.length} characters`);
     characters.forEach(async (character) => {
+      console.log('Checking', character.name);
       const bnetChar = await this.bnetService.getCharacter(
         character.name,
         character.realm,
@@ -186,6 +187,8 @@ export class CharacterService {
         this.updateCharacterEquipment(character);
 
         this.edit(character, payload);
+      } else {
+        console.log('no bnet info');
       }
     });
   }
